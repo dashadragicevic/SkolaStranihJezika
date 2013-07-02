@@ -407,6 +407,7 @@ public class FUnosKursa extends javax.swing.JDialog {
     private void jbSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSacuvajActionPerformed
         // TODO add your handling code here:
         KontrolorKISacuvajKurs.sacuvajKurs(jlKursID, jcbStraniJezik, jlStraniJezikGreska, jcbNivo, jlNivoGreska, jcbNastavnik, jlNastavnikGreska, jtxtFondCasova, jlFondCasovaGreska, jcbTermin1Dan, jlTermin1Greska, jspnTermin1Cas, jspnTermin1Min, jcbTermin2Dan, jlTermin2Greska, jspnTermin2Cas, jspnTermin2Min, jdpDatumPocetka, jlDatumPocetkaGreska, jdpDatumZavrsetka, jlDatumZavrsetkaGreska, jtxtNazivUdzbenika, jlNazivUdzbenikaGreska, jtxtCenaKursa, jlCenaKursaGreska);
+        this.dispose();
     }//GEN-LAST:event_jbSacuvajActionPerformed
 
     private void jbIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIzmeniActionPerformed
@@ -422,6 +423,7 @@ public class FUnosKursa extends javax.swing.JDialog {
         int opcija = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da obrisete kurs?", "Brisanje kursa", JOptionPane.YES_NO_OPTION);
         if (opcija == 0) {
             KontrolorKIObrisiKurs.obrisiKurs(jlKursID);
+            this.dispose();
         }
     }//GEN-LAST:event_jbObrisiActionPerformed
 

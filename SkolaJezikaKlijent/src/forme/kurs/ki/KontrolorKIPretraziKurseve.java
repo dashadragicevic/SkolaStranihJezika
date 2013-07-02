@@ -16,7 +16,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import konstante.Konstante;
 import kontroler.Kontroler;
-import sesija.Sesija;
 import tabela.model.ModelTabeleKurs;
 import transfer.KlijentTransferObjekat;
 import transfer.ServerTransferObjekat;

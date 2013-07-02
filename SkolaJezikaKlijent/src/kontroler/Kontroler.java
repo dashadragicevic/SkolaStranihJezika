@@ -9,7 +9,6 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import konstante.Konstante;
-import sesija.Sesija;
 import transfer.KlijentTransferObjekat;
 import transfer.ServerTransferObjekat;
 
