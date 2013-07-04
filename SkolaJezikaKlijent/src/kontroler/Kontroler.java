@@ -7,6 +7,7 @@ package kontroler;
 import domen.Kurs;
 import domen.Polaznik;
 import domen.Ugovor;
+import domen.Zaposleni;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -228,5 +229,55 @@ public class Kontroler {
         return sto;
     }
     
+    public ServerTransferObjekat noviZaposleni() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.KREIRAJ_NOVOG_ZAPOSLENOG);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat sacuvajZaposlenog(Zaposleni zaposleni) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.ZAPAMTI_ZAPOSLENOG);
+        kto.setPodaci(zaposleni);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat pretraziZaposlene(Zaposleni zaposleni) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.PRETRAZI_ZAPOSLENE);
+        kto.setPodaci(zaposleni);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+
+    public ServerTransferObjekat pronadjiZaposlenog(Zaposleni zaposleni) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.PRONADJI_ZAPOSLENOG);
+        kto.setPodaci(zaposleni);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
     
 }

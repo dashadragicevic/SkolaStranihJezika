@@ -29,4 +29,10 @@ public class Konstante {
     public static final int KREIRAJ_NOVI_UGOVOR = 14;
     public static final int DAJ_KURSEVE = 15;
     public static final int OBRISI_UGOVOR =16;
+    
+    public static final int KREIRAJ_NOVOG_ZAPOSLENOG = 17;
+    public static final int ZAPAMTI_ZAPOSLENOG = 18;
+    public static final int PRETRAZI_ZAPOSLENE = 19;
+    public static final int PRONADJI_ZAPOSLENOG = 20;
+    
 }

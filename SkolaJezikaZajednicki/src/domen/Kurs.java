@@ -58,7 +58,7 @@ public class Kurs implements Serializable, OpstiDomenskiObjekat {
         n.setNivoID(1);
         nivo = n;
         Zaposleni z = new Zaposleni();
-        z.setZaposleniID(1);
+        z.setZaposleniID(4);
         nastavnik = z;
     }
 

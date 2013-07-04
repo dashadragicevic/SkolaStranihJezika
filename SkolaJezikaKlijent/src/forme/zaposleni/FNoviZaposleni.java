@@ -2,33 +2,28 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme.polaznik;
+package forme.zaposleni;
 
-import domen.Polaznik;
-import domen.Ugovor;
+import forme.polaznik.*;
+import domen.Zaposleni;
+import forme.kurs.ki.KontrolorKIDajSveJezike;
 import forme.polaznik.ki.KontrolorKIDajSvaMesta;
-import forme.polaznik.ki.KontrolorKIDajSveKurseve;
-import forme.polaznik.ki.KontrolorKINoviPolaznik;
-import forme.polaznik.ki.KontrolorKINoviUgovor;
-import forme.polaznik.ki.KontrolorKISacuvajPolaznika;
-import javax.swing.DefaultCellEditor;
-import javax.swing.JComboBox;
+import forme.zaposleni.ki.KontrolorKINoviZaposleni;
+import forme.zaposleni.ki.KontrolorKISacuvajZaposlenog;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableColumn;
-import javax.swing.table.TableColumnModel;
-import org.jdesktop.swingx.table.DatePickerCellEditor;
-import tabela.model.ModelTabeleUgovori;
 
 /**
  *
  * @author Dasa
  */
-public class FNoviPolaznik extends javax.swing.JDialog {
+public class FNoviZaposleni extends javax.swing.JDialog {
 
     /**
      * Creates new form FNoviPolaznik
      */
-    public FNoviPolaznik() {
+    public FNoviZaposleni() {
         initComponents();
         srediFormu();
         jlPolaznikID.setVisible(false);
@@ -68,18 +63,23 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jlGreskaTelefon = new javax.swing.JLabel();
         jlPolaznikID = new javax.swing.JLabel();
         jtxtTelefon = new javax.swing.JTextField();
-        jbtnNoviPolaznik = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jtxtRadnaKnjizica = new javax.swing.JTextField();
+        jtxtZiroRacun = new javax.swing.JTextField();
+        jlGreskaZiroRacun = new javax.swing.JLabel();
+        jlGreskaRadnaKnjizica = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        jcbbStraniJezik = new javax.swing.JComboBox();
+        jlGreskaStraniJezik = new javax.swing.JLabel();
+        jbtnNoviZaposleni = new javax.swing.JButton();
         jbtnSacuvaj = new javax.swing.JButton();
         jbtnOmoguciIzmenu = new javax.swing.JButton();
-        jPanel2 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        jtblUgovori = new javax.swing.JTable();
-        jbtnNoviUgovor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Podaci o polazniku");
+        setTitle("Podaci o zaposlenom");
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Podaci o polazniku"));
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Podaci o zaposlenom"));
 
         jLabel1.setText("Ime:");
 
@@ -115,10 +115,25 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jlGreskaMesto.setForeground(new java.awt.Color(153, 0, 0));
         jlGreskaMesto.setText("*");
 
-        jlGreskaTelefon.setForeground(new java.awt.Color(153, 0, 0));
+        jlGreskaTelefon.setForeground(new java.awt.Color(155, 0, 0));
         jlGreskaTelefon.setText("*");
 
         jlPolaznikID.setText("jLabel9");
+
+        jLabel9.setText("Radna knjizica:");
+
+        jLabel10.setText("Ziro racun:");
+
+        jlGreskaZiroRacun.setForeground(new java.awt.Color(155, 0, 0));
+        jlGreskaZiroRacun.setText("*");
+
+        jlGreskaRadnaKnjizica.setForeground(new java.awt.Color(155, 0, 0));
+        jlGreskaRadnaKnjizica.setText("*");
+
+        jLabel11.setText("Jezik:");
+
+        jlGreskaStraniJezik.setForeground(new java.awt.Color(155, 0, 0));
+        jlGreskaStraniJezik.setText("*");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -127,38 +142,51 @@ public class FNoviPolaznik extends javax.swing.JDialog {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5)
-                    .addComponent(jLabel6)
-                    .addComponent(jLabel7)
-                    .addComponent(jlPolaznikID))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jcbbMesto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jtxtBrojLK, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtxtJMBG, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtxtPrezime, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jtxtIme)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jtxtUlica, javax.swing.GroupLayout.DEFAULT_SIZE, 602, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jtxtBrojUlice, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jlGreskaTelefon)
-                            .addComponent(jlGreskaMesto)
-                            .addComponent(jlGreskaBrojLK)
-                            .addComponent(jlGreskaJMBG)
-                            .addComponent(jlGreskaPrezime)
-                            .addComponent(jlGreskaIme)
-                            .addComponent(jlGreskaUlicaIBroj))
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jtxtTelefon))
+                            .addComponent(jLabel1)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel3)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6)
+                            .addComponent(jLabel7)
+                            .addComponent(jlPolaznikID)
+                            .addComponent(jLabel9)
+                            .addComponent(jLabel10))
+                        .addGap(24, 24, 24)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jtxtJMBG, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtxtBrojLK, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jtxtUlica, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jtxtBrojUlice, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jcbbMesto, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jtxtTelefon, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jtxtRadnaKnjizica)
+                            .addComponent(jtxtPrezime)
+                            .addComponent(jtxtIme)
+                            .addComponent(jtxtZiroRacun)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jlGreskaStraniJezik)
+                                    .addComponent(jlGreskaRadnaKnjizica)
+                                    .addComponent(jlGreskaZiroRacun)
+                                    .addComponent(jlGreskaMesto)
+                                    .addComponent(jlGreskaUlicaIBroj)
+                                    .addComponent(jlGreskaBrojLK)
+                                    .addComponent(jlGreskaJMBG)
+                                    .addComponent(jlGreskaPrezime)
+                                    .addComponent(jlGreskaIme))
+                                .addGap(0, 0, Short.MAX_VALUE))
+                            .addComponent(jlGreskaTelefon, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel11)
+                        .addGap(75, 75, 75)
+                        .addComponent(jcbbStraniJezik, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -205,22 +233,37 @@ public class FNoviPolaznik extends javax.swing.JDialog {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jcbbMesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7)
-                            .addComponent(jtxtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jlGreskaTelefon)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlGreskaTelefon)
+                .addGap(3, 3, 3)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(jtxtTelefon, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlGreskaRadnaKnjizica)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel9)
+                    .addComponent(jtxtRadnaKnjizica, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlGreskaZiroRacun)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel10)
+                    .addComponent(jtxtZiroRacun, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jlGreskaStraniJezik)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(jcbbStraniJezik, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jbtnNoviPolaznik.setText("Novi polaznik");
-        jbtnNoviPolaznik.addActionListener(new java.awt.event.ActionListener() {
+        jbtnNoviZaposleni.setText("Novi zaposleni");
+        jbtnNoviZaposleni.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnNoviPolaznikActionPerformed(evt);
+                jbtnNoviZaposleniActionPerformed(evt);
             }
         });
 
@@ -238,49 +281,6 @@ public class FNoviPolaznik extends javax.swing.JDialog {
             }
         });
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Ugovori"));
-
-        jtblUgovori.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
-            },
-            new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
-            }
-        ));
-        jScrollPane1.setViewportView(jtblUgovori);
-
-        jbtnNoviUgovor.setText("+");
-        jbtnNoviUgovor.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jbtnNoviUgovorActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jbtnNoviUgovor)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jbtnNoviUgovor)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
-        );
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -289,10 +289,9 @@ public class FNoviPolaznik extends javax.swing.JDialog {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jbtnNoviPolaznik)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jbtnNoviZaposleni)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
                         .addComponent(jbtnOmoguciIzmenu)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jbtnSacuvaj)))
@@ -304,69 +303,41 @@ public class FNoviPolaznik extends javax.swing.JDialog {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jbtnNoviPolaznik)
-                    .addComponent(jbtnSacuvaj)
-                    .addComponent(jbtnOmoguciIzmenu))
+                    .addComponent(jbtnNoviZaposleni)
+                    .addComponent(jbtnOmoguciIzmenu)
+                    .addComponent(jbtnSacuvaj))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jbtnNoviPolaznikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoviPolaznikActionPerformed
+    private void jbtnNoviZaposleniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoviZaposleniActionPerformed
         // TODO add your handling code here:
-        KontrolorKINoviPolaznik.noviPolaznik(jlPolaznikID);
+        KontrolorKINoviZaposleni.noviZaposleni(jlPolaznikID);
         omoguciUnos();
-        jbtnNoviPolaznik.setVisible(false);
+        jbtnNoviZaposleni.setVisible(false);
         jbtnOmoguciIzmenu.setVisible(false);
         jbtnSacuvaj.setVisible(true);
-
-        Polaznik p = new Polaznik();
-        p.setPolaznikID(Long.parseLong(jlPolaznikID.getText().trim()));
-        ModelTabeleUgovori mtu = (ModelTabeleUgovori) jtblUgovori.getModel();
-        mtu.setPolaznik(p);
-
-        TableColumnModel tcm = jtblUgovori.getColumnModel();
-        TableColumn tc1 = tcm.getColumn(6);
-        tc1.setCellEditor(new DatePickerCellEditor());
-
-        JComboBox jcbbKurs = new JComboBox();
-        KontrolorKIDajSveKurseve.dajSveKurseve(jcbbKurs);
-        TableColumn tc2 = tcm.getColumn(1);
-        tc2.setCellEditor(new DefaultCellEditor(jcbbKurs));
-    }//GEN-LAST:event_jbtnNoviPolaznikActionPerformed
+    }//GEN-LAST:event_jbtnNoviZaposleniActionPerformed
 
     private void jbtnSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnSacuvajActionPerformed
         // TODO add your handling code here:
-        KontrolorKISacuvajPolaznika.sacuvajPolaznika(jlPolaznikID, jtxtIme, jlGreskaIme, jtxtPrezime, jlGreskaPrezime,
+        KontrolorKISacuvajZaposlenog.sacuvajZaposlenog(jlPolaznikID, jtxtIme, jlGreskaIme, jtxtPrezime, jlGreskaPrezime,
                 jtxtJMBG, jlGreskaJMBG, jtxtBrojLK, jlGreskaBrojLK, jtxtUlica, jtxtBrojUlice, jlGreskaUlicaIBroj,
-                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtblUgovori);
+                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtxtRadnaKnjizica, jlGreskaRadnaKnjizica, 
+                jtxtZiroRacun, jlGreskaZiroRacun, jcbbStraniJezik, jlGreskaStraniJezik);
         //this.dispose();
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
     private void jbtnOmoguciIzmenuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnOmoguciIzmenuActionPerformed
         // TODO add your handling code here:
-        int opcija = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da izmenite podatke o polazniku?", "Izmena polaznika", JOptionPane.YES_NO_OPTION);
+        int opcija = JOptionPane.showConfirmDialog(this, "Da li ste sigurni da zelite da izmenite podatke o zaposlenom?", "Izmena polaznika", JOptionPane.YES_NO_OPTION);
         if (opcija == 0) {
             omoguciUnos();
-            TableColumnModel tcm = jtblUgovori.getColumnModel();
-            TableColumn tc1 = tcm.getColumn(6);
-            tc1.setCellEditor(new DatePickerCellEditor());
-
-            JComboBox jcbbKurs = new JComboBox();
-            KontrolorKIDajSveKurseve.dajSveKurseve(jcbbKurs);
-            TableColumn tc2 = tcm.getColumn(1);
-            tc2.setCellEditor(new DefaultCellEditor(jcbbKurs));
         }
     }//GEN-LAST:event_jbtnOmoguciIzmenuActionPerformed
-
-    private void jbtnNoviUgovorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoviUgovorActionPerformed
-        // TODO add your handling code here:
-        KontrolorKINoviUgovor.noviUgovor(jtblUgovori);
-    }//GEN-LAST:event_jbtnNoviUgovorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -404,6 +375,8 @@ public class FNoviPolaznik extends javax.swing.JDialog {
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -411,58 +384,46 @@ public class FNoviPolaznik extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JButton jbtnNoviPolaznik;
-    private javax.swing.JButton jbtnNoviUgovor;
+    private javax.swing.JButton jbtnNoviZaposleni;
     private javax.swing.JButton jbtnOmoguciIzmenu;
     private javax.swing.JButton jbtnSacuvaj;
     private javax.swing.JComboBox jcbbMesto;
+    private javax.swing.JComboBox jcbbStraniJezik;
     private javax.swing.JLabel jlGreskaBrojLK;
     private javax.swing.JLabel jlGreskaIme;
     private javax.swing.JLabel jlGreskaJMBG;
     private javax.swing.JLabel jlGreskaMesto;
     private javax.swing.JLabel jlGreskaPrezime;
+    private javax.swing.JLabel jlGreskaRadnaKnjizica;
+    private javax.swing.JLabel jlGreskaStraniJezik;
     private javax.swing.JLabel jlGreskaTelefon;
     private javax.swing.JLabel jlGreskaUlicaIBroj;
+    private javax.swing.JLabel jlGreskaZiroRacun;
     private javax.swing.JLabel jlPolaznikID;
-    private javax.swing.JTable jtblUgovori;
     private javax.swing.JTextField jtxtBrojLK;
     private javax.swing.JTextField jtxtBrojUlice;
     private javax.swing.JTextField jtxtIme;
     private javax.swing.JTextField jtxtJMBG;
     private javax.swing.JTextField jtxtPrezime;
+    private javax.swing.JTextField jtxtRadnaKnjizica;
     private javax.swing.JTextField jtxtTelefon;
     private javax.swing.JTextField jtxtUlica;
+    private javax.swing.JTextField jtxtZiroRacun;
     // End of variables declaration//GEN-END:variables
 
     private void srediFormu() {
         KontrolorKIDajSvaMesta.dajSvaMesta(jcbbMesto);
+        KontrolorKIDajSveJezike.dajSveJezike(jcbbStraniJezik);
 
         onemoguciUnos();
 
-        srediTabelu();
-
-        jbtnNoviPolaznik.setVisible(true);
-        jbtnNoviPolaznik.setEnabled(true);
+        jbtnNoviZaposleni.setVisible(true);
+        jbtnNoviZaposleni.setEnabled(true);
 
         jbtnOmoguciIzmenu.setVisible(false);
         jbtnSacuvaj.setVisible(false);
-    }
-
-    public void srediTabelu() {
-        Polaznik p = new Polaznik();
-        ModelTabeleUgovori m = new ModelTabeleUgovori(p);
-        jtblUgovori.setModel(m);
-
-        jtblUgovori.getColumnModel().getColumn(0).setPreferredWidth(15);
-        jtblUgovori.getColumnModel().getColumn(1).setPreferredWidth(300);
-        jtblUgovori.getColumnModel().getColumn(2).setPreferredWidth(15);
-        jtblUgovori.getColumnModel().getColumn(3).setPreferredWidth(65);
-        jtblUgovori.getColumnModel().getColumn(4).setPreferredWidth(15);
-        jtblUgovori.getColumnModel().getColumn(5).setPreferredWidth(65);
-        jtblUgovori.getColumnModel().getColumn(6).setPreferredWidth(150);
     }
 
     public void onemoguciUnos() {
@@ -473,20 +434,19 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jtxtUlica.setEditable(false);
         jtxtBrojUlice.setEditable(false);
         jtxtTelefon.setEditable(false);
+        jtxtRadnaKnjizica.setEditable(false);
+        jtxtZiroRacun.setEditable(false);
 
         jcbbMesto.setEnabled(false);
+        jcbbStraniJezik.setEnabled(false);
 
         jbtnSacuvaj.setEnabled(false);
         jbtnOmoguciIzmenu.setEnabled(true);
-        jbtnNoviPolaznik.setEnabled(false);
+        jbtnNoviZaposleni.setEnabled(false);
 
         jbtnOmoguciIzmenu.setVisible(true);
         jbtnSacuvaj.setVisible(true);
-        jbtnNoviPolaznik.setVisible(false);
-
-        jbtnNoviUgovor.setEnabled(false);
-
-        jtblUgovori.setEnabled(false);
+        jbtnNoviZaposleni.setVisible(false);
     }
 
     public void omoguciUnos() {
@@ -497,36 +457,37 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jtxtUlica.setEditable(true);
         jtxtBrojUlice.setEditable(true);
         jtxtTelefon.setEditable(true);
+        jtxtRadnaKnjizica.setEditable(true);
+        jtxtZiroRacun.setEditable(true);
 
         jcbbMesto.setEnabled(true);
+        jcbbStraniJezik.setEnabled(true);
 
         jbtnSacuvaj.setEnabled(true);
         jbtnOmoguciIzmenu.setEnabled(false);
-        jbtnNoviPolaznik.setEnabled(false);
+        jbtnNoviZaposleni.setEnabled(false);
 
         jbtnSacuvaj.setVisible(true);
         jbtnOmoguciIzmenu.setVisible(false);
-        jbtnNoviPolaznik.setVisible(false);
-
-        jbtnNoviUgovor.setEnabled(true);
-
-        jtblUgovori.setEnabled(true);
+        jbtnNoviZaposleni.setVisible(false);
     }
 
-    public void popuniPodatke(Polaznik p) {
-        jlPolaznikID.setText(p.getPolaznikID() + "");
-        jtxtIme.setText(p.getIme());
-        jtxtPrezime.setText(p.getPrezime());
-        jtxtJMBG.setText(p.getJMBG());
-        jtxtBrojLK.setText(p.getBrojLicneKarte());
-        jtxtUlica.setText(p.getNazivUlice());
-        jtxtBrojUlice.setText(p.getBrojUlice());
+    public void popuniPodatke(Zaposleni z) {
+        jlPolaznikID.setText(z.getZaposleniID() + "");
+        jtxtIme.setText(z.getIme());
+        jtxtPrezime.setText(z.getPrezime());
+        jtxtJMBG.setText(z.getJMBG());
+        jtxtBrojLK.setText(z.getBrojLicneKarte());
+        jtxtUlica.setText(z.getNazivUlice());
+        jtxtBrojUlice.setText(z.getBrojUlice());
         jcbbMesto.setEditable(true);
-        jcbbMesto.setSelectedItem(p.getMesto());
+        jcbbMesto.setSelectedItem(z.getMesto());
         jcbbMesto.setEditable(false);
-        jtxtTelefon.setText(p.getBrojTelefona());
-
-        ModelTabeleUgovori mtu = ((ModelTabeleUgovori) jtblUgovori.getModel());
-        mtu.setPolaznik(p);
+        jtxtTelefon.setText(z.getBrojTelefona());
+        jtxtRadnaKnjizica.setText(z.getBrojRadneKnjizice());
+        jtxtZiroRacun.setText(z.getBrojZiroRacuna());
+        jcbbStraniJezik.setEditable(true);
+        jcbbStraniJezik.setSelectedItem(z.getJezik());
+        jcbbStraniJezik.setEditable(false);
     }
 }

@@ -26,7 +26,6 @@ public class FPretragaKursevaTabela extends javax.swing.JDialog {
     public FPretragaKursevaTabela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
-        setLocationRelativeTo(null);
         srediFormu();
         popuniTabeluKurs();        
     }

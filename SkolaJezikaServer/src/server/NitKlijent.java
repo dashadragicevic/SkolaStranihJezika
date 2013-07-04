@@ -8,6 +8,7 @@ import domen.Kurs;
 import domen.OpstiDomenskiObjekat;
 import domen.Polaznik;
 import domen.Ugovor;
+import domen.Zaposleni;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -210,7 +211,53 @@ public class NitKlijent extends Thread {
                                 sto.setPoruka(e.getMessage());
                             }
                             break;
-                        
+
+                        case Konstante.KREIRAJ_NOVOG_ZAPOSLENOG:
+                            try {
+                                OpstiDomenskiObjekat zaposleni = Kontroler.vratiInstancu().kreirajNovogZaposlenog();
+                                sto.setSignal(true);
+                                sto.setPodaci(zaposleni);
+                                sto.setPoruka("Sistem je kreirao novog zaposlenog!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.ZAPAMTI_ZAPOSLENOG:
+                            try {
+                                OpstiDomenskiObjekat zaposleni = (Zaposleni) kto.getPodaci();
+                                Kontroler.vratiInstancu().zapamtiZaposlenog(zaposleni);
+                                sto.setSignal(true);
+                                sto.setPoruka("Sistem je zapamtio podatke o zaposlenom!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.PRETRAZI_ZAPOSLENE:
+                            try {
+                                OpstiDomenskiObjekat zaposleni = (Zaposleni) kto.getPodaci();
+                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().pretraziZaposlene(zaposleni);
+                                sto.setSignal(true);
+                                sto.setPodaci(lista);
+                                sto.setPoruka("Sistem je pronasao zaposlene po zadatoj vrednosti!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.PRONADJI_ZAPOSLENOG:
+                            try {
+                                OpstiDomenskiObjekat z = (Zaposleni) kto.getPodaci();
+                                OpstiDomenskiObjekat zaposleni = Kontroler.vratiInstancu().pronadjiZaposlenog(z);
+                                sto.setSignal(true);
+                                sto.setPodaci(zaposleni);
+                                sto.setPoruka("Sistem je pronasao podatke o zaposlenom!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
                     }
                     outSoket = new ObjectOutputStream(s.getOutputStream());
                     outSoket.writeObject(sto);

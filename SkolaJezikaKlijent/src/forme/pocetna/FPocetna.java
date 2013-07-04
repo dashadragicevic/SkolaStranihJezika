@@ -8,6 +8,8 @@ import forme.kurs.FPretragaKursevaTabela;
 import forme.kurs.FUnosKursa;
 import forme.polaznik.FNoviPolaznik;
 import forme.polaznik.FPretragaPolaznika;
+import forme.zaposleni.FNoviZaposleni;
+import forme.zaposleni.FPretragaZaposlenih;
 
 
 /**
@@ -21,7 +23,6 @@ public class FPocetna extends javax.swing.JFrame {
      */
     public FPocetna() {
         initComponents();
-        setLocationRelativeTo(null);
     }
 
     /**
@@ -42,6 +43,9 @@ public class FPocetna extends javax.swing.JFrame {
         jmPolaznik = new javax.swing.JMenu();
         jmiNoviPolaznik = new javax.swing.JMenuItem();
         jmiPretragaPolaznika = new javax.swing.JMenuItem();
+        jmZaposleni = new javax.swing.JMenu();
+        jmiNoviZaposleni = new javax.swing.JMenuItem();
+        jmiPretragaZaposlenih = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Skola stranih jezika");
@@ -96,6 +100,26 @@ public class FPocetna extends javax.swing.JFrame {
 
         jmbOsnovniMeni.add(jmPolaznik);
 
+        jmZaposleni.setText("Zaposleni");
+
+        jmiNoviZaposleni.setText("Novi zaposleni");
+        jmiNoviZaposleni.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNoviZaposleniActionPerformed(evt);
+            }
+        });
+        jmZaposleni.add(jmiNoviZaposleni);
+
+        jmiPretragaZaposlenih.setText("Pretraga zaposlenih");
+        jmiPretragaZaposlenih.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPretragaZaposlenihActionPerformed(evt);
+            }
+        });
+        jmZaposleni.add(jmiPretragaZaposlenih);
+
+        jmbOsnovniMeni.add(jmZaposleni);
+
         setJMenuBar(jmbOsnovniMeni);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -132,16 +156,28 @@ public class FPocetna extends javax.swing.JFrame {
     private void jmiNoviPolaznikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviPolaznikActionPerformed
         // TODO add your handling code here:
         FNoviPolaznik formaPolaznik = new FNoviPolaznik();
-        formaPolaznik.setAlwaysOnTop(true);
+        //formaPolaznik.setAlwaysOnTop(true);
         formaPolaznik.setVisible(true);
     }//GEN-LAST:event_jmiNoviPolaznikActionPerformed
 
     private void jmiPretragaPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaPolaznikaActionPerformed
         // TODO add your handling code here:
         FPretragaPolaznika formaPretraga = new FPretragaPolaznika();
-        formaPretraga.setAlwaysOnTop(true);
+        //formaPretraga.setAlwaysOnTop(true);
         formaPretraga.setVisible(true);
     }//GEN-LAST:event_jmiPretragaPolaznikaActionPerformed
+
+    private void jmiNoviZaposleniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviZaposleniActionPerformed
+        // TODO add your handling code here:
+        FNoviZaposleni f = new FNoviZaposleni();
+        f.setVisible(true);
+    }//GEN-LAST:event_jmiNoviZaposleniActionPerformed
+
+    private void jmiPretragaZaposlenihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaZaposlenihActionPerformed
+        // TODO add your handling code here:
+        FPretragaZaposlenih f = new FPretragaZaposlenih();
+        f.setVisible(true);
+    }//GEN-LAST:event_jmiPretragaZaposlenihActionPerformed
 
     /**
      * @param args the command line arguments
@@ -181,11 +217,14 @@ public class FPocetna extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jmPocetak;
     private javax.swing.JMenu jmPolaznik;
+    private javax.swing.JMenu jmZaposleni;
     private javax.swing.JMenuBar jmbOsnovniMeni;
     private javax.swing.JMenuItem jmiKraj;
     private javax.swing.JMenuItem jmiNoviPolaznik;
+    private javax.swing.JMenuItem jmiNoviZaposleni;
     private javax.swing.JMenuItem jmiPretragaKursevaTabela;
     private javax.swing.JMenuItem jmiPretragaPolaznika;
+    private javax.swing.JMenuItem jmiPretragaZaposlenih;
     private javax.swing.JMenuItem jmiUnosKursa;
     // End of variables declaration//GEN-END:variables
 

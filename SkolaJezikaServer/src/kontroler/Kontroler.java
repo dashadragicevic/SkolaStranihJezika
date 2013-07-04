@@ -5,7 +5,6 @@
 package kontroler;
 
 import baza.DBKomunikacija;
-import com.sun.crypto.provider.ARCFOURCipher;
 import domen.Kurs;
 import domen.Mesto;
 import domen.Nivo;
@@ -34,10 +33,13 @@ import so.stranijezici.NadjiStaneJezikePoIduSO;
 import so.stranijezici.VratiStraneJezikeSO;
 import so.ugovor.NoviUgovorSO;
 import so.ugovor.PretraziUgovoreSO;
-import so.ugovor.PronadjiUgovorSO;
 import so.ugovor.ZapamtiUgovorSO;
 import so.zaposleni.NadjiZaposlenePoIduSO;
+import so.zaposleni.NoviZaposleniSO;
+import so.zaposleni.PretraziZaposleneSO;
+import so.zaposleni.PronadjiZaposlenogSO;
 import so.zaposleni.VratiZaposleneSO;
+import so.zaposleni.ZapamtiZaposlenogSO;
 
 /**
  *
@@ -159,8 +161,8 @@ public class Kontroler {
     public void zapamtiPolaznika(OpstiDomenskiObjekat polaznik) throws Exception {
         ZapamtiPolaznikaSO zp = new ZapamtiPolaznikaSO();
         zp.izvrsiOperaciju(polaznik);
-        
-        for (Ugovor ugovor : ((Polaznik)polaznik).getUgovori()) {
+
+        for (Ugovor ugovor : ((Polaznik) polaznik).getUgovori()) {
             ZapamtiUgovorSO zu = new ZapamtiUgovorSO();
             zu.izvrsiOperaciju(ugovor);
         }
@@ -187,30 +189,30 @@ public class Kontroler {
         NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
         nmpidu.izvrsiOperaciju(((Polaznik) p).getMesto());
         ((Polaznik) p).setMesto((Mesto) nmpidu.getLista().get(0));
-        
+
         PretraziUgovoreSO ppu = new PretraziUgovoreSO();
         Ugovor u = new Ugovor();
-        u.setPolaznik((Polaznik)p);
+        u.setPolaznik((Polaznik) p);
         ppu.izvrsiOperaciju(u);
         List<OpstiDomenskiObjekat> ugovori = ppu.getLista();
-        
+
         List<Ugovor> praviUgovori = new ArrayList<>();
         for (OpstiDomenskiObjekat ugovor : ugovori) {
-            Ugovor ug = (Ugovor)ugovor;
-            
+            Ugovor ug = (Ugovor) ugovor;
+
             PronadjiPolaznikaSO ppso = new PronadjiPolaznikaSO();
-            ppso.izvrsiOperaciju((Polaznik)p);
+            ppso.izvrsiOperaciju((Polaznik) p);
             Polaznik polaz = (Polaznik) ppso.getLista().get(0);
             ug.setPolaznik(polaz);
-            
+
             PronadjiKursSO pkso = new PronadjiKursSO();
             pkso.izvrsiOperaciju(ug.getKurs());
-            Kurs kurs = (Kurs)pkso.getLista().get(0);
+            Kurs kurs = (Kurs) pkso.getLista().get(0);
             ug.setKurs(kurs);
-            
+
             praviUgovori.add(ug);
         }
-        ((Polaznik)p).setUgovori(praviUgovori);
+        ((Polaznik) p).setUgovori(praviUgovori);
 
         return p;
     }
@@ -239,6 +241,49 @@ public class Kontroler {
         }
         return lista;
     }
-    
-    
+
+    public OpstiDomenskiObjekat kreirajNovogZaposlenog() throws Exception {
+        NoviZaposleniSO nz = new NoviZaposleniSO();
+        nz.izvrsiOperaciju(new Zaposleni());
+        return nz.getZaposleni();
+    }
+
+    public void zapamtiZaposlenog(OpstiDomenskiObjekat zaposleni) throws Exception {
+        ZapamtiZaposlenogSO zz = new ZapamtiZaposlenogSO();
+        zz.izvrsiOperaciju(zaposleni);
+    }
+
+    public List<OpstiDomenskiObjekat> pretraziZaposlene(OpstiDomenskiObjekat zaposleni) throws Exception {
+        PretraziZaposleneSO pz = new PretraziZaposleneSO();
+        pz.izvrsiOperaciju(zaposleni);
+        List<OpstiDomenskiObjekat> lista = pz.getLista();
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
+            nmpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getMesto());
+            ((Zaposleni) opstiDomenskiObjekat).setMesto((Mesto) nmpidu.getLista().get(0));
+
+            NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
+            nsjpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getJezik());
+            ((Zaposleni) opstiDomenskiObjekat).setJezik((StraniJezik) nsjpidu.getLista().get(0));
+        }
+        return lista;
+    }
+
+    public OpstiDomenskiObjekat pronadjiZaposlenog(OpstiDomenskiObjekat zaposleni) throws Exception {
+        PronadjiZaposlenogSO pz = new PronadjiZaposlenogSO();
+        pz.izvrsiOperaciju(zaposleni);
+        List<OpstiDomenskiObjekat> lista = pz.getLista();
+        OpstiDomenskiObjekat z = lista.get(0);
+
+        NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
+        nmpidu.izvrsiOperaciju(((Zaposleni) z).getMesto());
+        ((Zaposleni) z).setMesto((Mesto) nmpidu.getLista().get(0));
+
+        NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
+        nsjpidu.izvrsiOperaciju(((Zaposleni) z).getJezik());
+        ((Zaposleni) z).setJezik((StraniJezik) nsjpidu.getLista().get(0));
+
+
+        return z;
+    }
 }

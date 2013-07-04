@@ -27,6 +27,22 @@ public class Zaposleni implements Serializable, OpstiDomenskiObjekat {
     private String brojUlice;
     private Mesto mesto;
     private StraniJezik jezik;
+
+    public Zaposleni() {
+        ime="";
+        prezime="";
+        JMBG="";
+        brojLicneKarte="";
+        brojTelefona="";
+        nazivUlice="";
+        brojUlice="";
+        mesto = new Mesto();
+        mesto.setPostanskiBroj(11000);
+        brojRadneKnjizice="";
+        brojZiroRacuna="";
+        jezik = new StraniJezik();
+        jezik.setJezikID(1);
+    }   
     
     /**
      * @return the zaposleniID
@@ -208,12 +224,12 @@ public class Zaposleni implements Serializable, OpstiDomenskiObjekat {
         
     @Override
     public String vratiKoloneZaInsert() {
-        return "";
+        return "(Ime, Prezime, JMBG, BrojLicneKarte, BrojTelefona, NazivUlice, BrojUlice, PttBroj, BrojRadneKnjizice, BrojZiroRacuna, JezikID)";
     }
 
     @Override
     public String vratiVrednostZaInsert() {
-        return "";
+        return "'"+ime+"','"+prezime+"','"+JMBG+"','"+brojLicneKarte+"','"+brojTelefona+"','"+nazivUlice+"','"+brojUlice+"',"+mesto.getPostanskiBroj()+",'"+brojRadneKnjizice+"','"+brojZiroRacuna+"',"+jezik.getJezikID();
     }
 
     @Override
@@ -267,12 +283,34 @@ public class Zaposleni implements Serializable, OpstiDomenskiObjekat {
 
     @Override
     public String vratiVrednostiZaUpdate() {
-        return "";
+        return "Ime='"+ime+"', Prezime='"+prezime+"', JMBG='"+JMBG+"', BrojLicneKarte='"+brojLicneKarte+"', BrojTelefona='"+brojTelefona+"', NazivUlice='"+nazivUlice+"', BrojUlice='"+brojUlice+"', PttBroj="+mesto.getPostanskiBroj()+", BrojRadneKnjizice='"+brojRadneKnjizice+"', BrojZiroRacuna='"+brojZiroRacuna+"', JezikID="+jezik.getJezikID();
     }
 
     @Override
     public String vratiVrednostZaWhereZaPretragu() {
-        return "";
+        String s = "";
+        if(!"".equals(ime)&&"".equals(prezime)&&"".equals(JMBG)){
+            s = "Ime = '"+ime+"'";
+        }
+        else if("".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
+            s = "Prezime = '"+prezime+"'";
+        }
+        else if("".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
+            s = "JMBG = '"+JMBG+"'";
+        }
+        else if(!"".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"'";
+        }
+        else if(!"".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND JMBG = '"+JMBG+"'";
+        }
+        else if("".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+        }
+        else if(!"".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+        }
+        return s;
     }
     
 }

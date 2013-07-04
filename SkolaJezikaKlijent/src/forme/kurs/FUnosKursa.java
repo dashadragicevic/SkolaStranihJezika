@@ -26,7 +26,6 @@ public class FUnosKursa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         srediFormu();
-        setLocationRelativeTo(null);
         jlKursID.setVisible(false);
     }
 
@@ -543,17 +542,27 @@ public class FUnosKursa extends javax.swing.JDialog {
 
     public void popuniPodatke(Kurs kurs) {
         jlKursID.setText(kurs.getKursID() + "");
+        jcbStraniJezik.setEditable(true);
         jcbStraniJezik.getModel().setSelectedItem(kurs.getJezik());
+        jcbStraniJezik.setEditable(false);
+        jcbNivo.setEditable(true);
         jcbNivo.getModel().setSelectedItem(kurs.getNivo());
+        jcbNivo.setEditable(false);
+        jcbNastavnik.setEditable(true);
         jcbNastavnik.getModel().setSelectedItem(kurs.getNastavnik());
+        jcbNastavnik.setEditable(false);
         jtxtFondCasova.setText(kurs.getFondCasova() + "");
         String[] d1 = kurs.getTermin1().split(" ");
+        jcbTermin1Dan.setEditable(true);
         jcbTermin1Dan.getModel().setSelectedItem(d1[0]);
+        jcbTermin1Dan.setEditable(false);
         String[] vreme1 = d1[1].split(":");
         jspnTermin1Cas.setValue(Integer.parseInt(vreme1[0]));
         jspnTermin1Min.setValue(Integer.parseInt(vreme1[1]));
         String[] d2 = kurs.getTermin2().split(" ");
+        jcbTermin2Dan.setEditable(true);
         jcbTermin2Dan.getModel().setSelectedItem(d2[0]);
+        jcbTermin2Dan.setEditable(false);
         String[] vreme2 = d2[1].split(":");
         jspnTermin2Cas.setValue(Integer.parseInt(vreme2[0]));
         jspnTermin2Min.setValue(Integer.parseInt(vreme2[1]));

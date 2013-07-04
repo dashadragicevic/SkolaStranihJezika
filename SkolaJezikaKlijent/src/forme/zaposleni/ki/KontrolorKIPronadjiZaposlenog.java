@@ -2,10 +2,10 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme.polaznik.ki;
+package forme.zaposleni.ki;
 
-import domen.Polaznik;
-import forme.polaznik.FNoviPolaznik;
+import domen.Zaposleni;
+import forme.zaposleni.FNoviZaposleni;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import kontroler.Kontroler;
@@ -15,22 +15,22 @@ import transfer.ServerTransferObjekat;
  *
  * @author Dasa
  */
-public class KontrolorKIPronadjiPolaznika {
+public class KontrolorKIPronadjiZaposlenog {
     
-    public static void pronadjiPolaznika(JTable jtblPolaznik){
+    public static void pronadjiZaposlenog(JTable jtblZaposleni){
         try {
-            int id = Integer.parseInt(jtblPolaznik.getValueAt(jtblPolaznik.getSelectedRow(), 0).toString());
-            Polaznik p = new Polaznik();
-            p.setPolaznikID(id);
+            int id = Integer.parseInt(jtblZaposleni.getValueAt(jtblZaposleni.getSelectedRow(), 0).toString());
+            Zaposleni z = new Zaposleni();
+            z.setZaposleniID(id);
 
-            ServerTransferObjekat sto = Kontroler.vratiInstancu().pronadjiPolaznika(p);
+            ServerTransferObjekat sto = Kontroler.vratiInstancu().pronadjiZaposlenog(z);
             
             if (sto.isSignal()) {
                 //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
                 
-                Polaznik polaznik = (Polaznik) sto.getPodaci();                
-                FNoviPolaznik formaPrikaz = new FNoviPolaznik();
-                formaPrikaz.popuniPodatke(polaznik);
+                Zaposleni zap = (Zaposleni) sto.getPodaci();                
+                FNoviZaposleni formaPrikaz = new FNoviZaposleni();
+                formaPrikaz.popuniPodatke(zap);
                 formaPrikaz.onemoguciUnos();
                 //formaPrikaz.setAlwaysOnTop(true);
                 formaPrikaz.setVisible(true);
@@ -38,7 +38,7 @@ public class KontrolorKIPronadjiPolaznika {
                 //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
-            JOptionPane.showMessageDialog(null, "Greska pri ucitavanju polaznika: " + ex.getMessage());
+            JOptionPane.showMessageDialog(null, "Greska pri ucitavanju zaposlenog: " + ex.getMessage());
         }
     }
     
