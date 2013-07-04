@@ -5,6 +5,7 @@
 package domen;
 
 import java.io.Serializable;
+import java.sql.ResultSet;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,7 +13,7 @@ import java.util.List;
  *
  * @author Dasa
  */
-public class Polaznik implements Serializable {
+public class Polaznik implements Serializable, OpstiDomenskiObjekat {
     
     private long polaznikID;
     private String ime;
@@ -40,6 +41,17 @@ public class Polaznik implements Serializable {
 
     public Polaznik() {
         ugovori = new ArrayList<>();
+        
+        ime="";
+        prezime="";
+        JMBG="";
+        brojLicneKarte="";
+        brojTelefona="";
+        nazivUlice="";
+        brojUlice="";
+        mesto = new Mesto();
+        mesto.setPostanskiBroj(11000);
+        
     }
 
     /**
@@ -180,6 +192,93 @@ public class Polaznik implements Serializable {
      */
     public void setUgovori(List<Ugovor> ugovori) {
         this.ugovori = ugovori;
+    }
+
+    @Override
+    public String vratiImeTabele() {
+        return "Polaznik";
+    }
+
+    @Override
+    public String vratiKoloneZaInsert() {
+        return "(Ime, Prezime, JMBG, BrojLicneKarte, BrojTelefona, NazivUlice, BrojUlice, PttBroj)";
+    }
+
+    @Override
+    public String vratiVrednostZaInsert() {
+        return "'"+ime+"','"+prezime+"','"+JMBG+"','"+brojLicneKarte+"','"+brojTelefona+"','"+nazivUlice+"','"+brojUlice+"',"+mesto.getPostanskiBroj();
+    }
+
+    @Override
+    public List<OpstiDomenskiObjekat> vratiListuIzResultSeta(ResultSet rs) {
+        List<OpstiDomenskiObjekat> lp = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                long pid = rs.getLong("PolaznikID");
+                String imep = rs.getString("Ime");
+                String prezimep = rs.getString("Prezime");
+                String jmbg = rs.getString("JMBG");
+                String brlk = rs.getString("BrojLicneKarte");
+                String tel = rs.getString("BrojTelefona");
+                String nazul = rs.getString("NazivUlice");
+                String brul = rs.getString("BrojUlice");
+                long ptt = rs.getLong("PttBroj");
+
+                Polaznik p = new Polaznik();
+                p.setPolaznikID(pid);
+                p.setIme(imep);
+                p.setPrezime(prezimep);
+                p.setJMBG(jmbg);
+                p.setBrojLicneKarte(brlk);
+                p.setBrojTelefona(tel);
+                p.setNazivUlice(nazul);
+                p.setBrojUlice(brul);
+                Mesto m = new Mesto();
+                m.setPostanskiBroj(ptt);
+
+                lp.add(p);
+            }
+        } catch (Exception e) {
+            System.out.println("Sistem ne moze da nadje polaznika po zadatoj vrednosti!");
+        }
+        return lp;
+    }
+
+    @Override
+    public String vratiVrednostZaWhere() {
+        return "PolaznikID="+polaznikID;
+    }
+
+    @Override
+    public String vratiVrednostiZaUpdate() {
+        return "Ime='"+ime+"', Prezime='"+prezime+"', JMBG='"+JMBG+"', BrojLicneKarte='"+brojLicneKarte+"', BrojTelefona='"+brojTelefona+"', NazivUlice='"+nazivUlice+"', BrojUlice='"+brojUlice+"', PttBroj="+mesto.getPostanskiBroj()+"";
+    }
+
+    @Override
+    public String vratiVrednostZaWhereZaPretragu() {
+        String s = "";
+        if(!"".equals(ime)&&"".equals(prezime)&&"".equals(JMBG)){
+            s = "Ime = '"+ime+"'";
+        }
+        else if("".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
+            s = "Prezime = '"+prezime+"'";
+        }
+        else if("".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
+            s = "JMBG = '"+JMBG+"'";
+        }
+        else if(!"".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"'";
+        }
+        else if(!"".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND JMBG = '"+JMBG+"'";
+        }
+        else if("".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+        }
+        else if(!"".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
+            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+        }
+        return s;
     }
     
 }

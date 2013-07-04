@@ -2,20 +2,26 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package forme.kurs;
+package forme.pocetna;
+
+import forme.kurs.FPretragaKursevaTabela;
+import forme.kurs.FUnosKursa;
+import forme.polaznik.FNoviPolaznik;
+import forme.polaznik.FPretragaPolaznika;
 
 
 /**
  *
  * @author Dasa
  */
-public class FPocetnaKurs extends javax.swing.JFrame {
+public class FPocetna extends javax.swing.JFrame {
 
     /**
-     * Creates new form FPocetnaKurs
+     * Creates new form FPocetna
      */
-    public FPocetnaKurs() {
+    public FPocetna() {
         initComponents();
+        setLocationRelativeTo(null);
     }
 
     /**
@@ -33,12 +39,15 @@ public class FPocetnaKurs extends javax.swing.JFrame {
         jmiPretragaKursevaTabela = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
         jmiKraj = new javax.swing.JMenuItem();
+        jmPolaznik = new javax.swing.JMenu();
+        jmiNoviPolaznik = new javax.swing.JMenuItem();
+        jmiPretragaPolaznika = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Skola stranih jezika");
         setAlwaysOnTop(true);
 
-        jmPocetak.setText("Pocetak");
+        jmPocetak.setText("Kurs");
 
         jmiUnosKursa.setText("Novi kurs");
         jmiUnosKursa.addActionListener(new java.awt.event.ActionListener() {
@@ -48,7 +57,7 @@ public class FPocetnaKurs extends javax.swing.JFrame {
         });
         jmPocetak.add(jmiUnosKursa);
 
-        jmiPretragaKursevaTabela.setText("Pretraga kurseva - tabela");
+        jmiPretragaKursevaTabela.setText("Pretraga kurseva");
         jmiPretragaKursevaTabela.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jmiPretragaKursevaTabelaActionPerformed(evt);
@@ -66,6 +75,26 @@ public class FPocetnaKurs extends javax.swing.JFrame {
         jmPocetak.add(jmiKraj);
 
         jmbOsnovniMeni.add(jmPocetak);
+
+        jmPolaznik.setText(" Polaznik");
+
+        jmiNoviPolaznik.setText("Novi polaznik");
+        jmiNoviPolaznik.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiNoviPolaznikActionPerformed(evt);
+            }
+        });
+        jmPolaznik.add(jmiNoviPolaznik);
+
+        jmiPretragaPolaznika.setText("Pretraga polaznika");
+        jmiPretragaPolaznika.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jmiPretragaPolaznikaActionPerformed(evt);
+            }
+        });
+        jmPolaznik.add(jmiPretragaPolaznika);
+
+        jmbOsnovniMeni.add(jmPolaznik);
 
         setJMenuBar(jmbOsnovniMeni);
 
@@ -100,6 +129,20 @@ public class FPocetnaKurs extends javax.swing.JFrame {
         formaTabela.setVisible(true);
     }//GEN-LAST:event_jmiPretragaKursevaTabelaActionPerformed
 
+    private void jmiNoviPolaznikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviPolaznikActionPerformed
+        // TODO add your handling code here:
+        FNoviPolaznik formaPolaznik = new FNoviPolaznik();
+        formaPolaznik.setAlwaysOnTop(true);
+        formaPolaznik.setVisible(true);
+    }//GEN-LAST:event_jmiNoviPolaznikActionPerformed
+
+    private void jmiPretragaPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaPolaznikaActionPerformed
+        // TODO add your handling code here:
+        FPretragaPolaznika formaPretraga = new FPretragaPolaznika();
+        formaPretraga.setAlwaysOnTop(true);
+        formaPretraga.setVisible(true);
+    }//GEN-LAST:event_jmiPretragaPolaznikaActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -117,29 +160,32 @@ public class FPocetnaKurs extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FPocetnaKurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPocetna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FPocetnaKurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPocetna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FPocetnaKurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPocetna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FPocetnaKurs.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FPocetna.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FPocetnaKurs().setVisible(true);
+                new FPocetna().setVisible(true);
             }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPopupMenu.Separator jSeparator1;
     private javax.swing.JMenu jmPocetak;
+    private javax.swing.JMenu jmPolaznik;
     private javax.swing.JMenuBar jmbOsnovniMeni;
     private javax.swing.JMenuItem jmiKraj;
+    private javax.swing.JMenuItem jmiNoviPolaznik;
     private javax.swing.JMenuItem jmiPretragaKursevaTabela;
+    private javax.swing.JMenuItem jmiPretragaPolaznika;
     private javax.swing.JMenuItem jmiUnosKursa;
     // End of variables declaration//GEN-END:variables
 

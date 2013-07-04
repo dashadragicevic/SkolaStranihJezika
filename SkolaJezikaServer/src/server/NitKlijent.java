@@ -5,18 +5,14 @@
 package server;
 
 import domen.Kurs;
-import domen.Mesto;
-import domen.Nivo;
 import domen.OpstiDomenskiObjekat;
-import domen.StraniJezik;
-import domen.Zaposleni;
+import domen.Polaznik;
+import domen.Ugovor;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import konstante.Konstante;
 import kontroler.Kontroler;
 import transfer.KlijentTransferObjekat;
@@ -49,16 +45,6 @@ public class NitKlijent extends Thread {
                     ServerTransferObjekat sto = new ServerTransferObjekat();
 
                     switch (operacija) {
-                        case Konstante.DAJ_MESTA:
-                            try {
-                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().dajMesta();
-                                sto.setSignal(true);
-                                sto.setPodaci(lista);
-                            } catch (Exception e) {
-                                sto.setSignal(false);
-                                sto.setPoruka(e.getMessage());
-                            }
-                            break;
                         case Konstante.DAJ_STRANE_JEZIKE:
                             try {
                                 List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().dajStraneJezike();
@@ -147,8 +133,84 @@ public class NitKlijent extends Thread {
                             }
                             break;
 
-
-
+                        case Konstante.DAJ_MESTA:
+                            try {
+                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().dajMesta();
+                                sto.setSignal(true);
+                                sto.setPodaci(lista);
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.KREIRAJ_NOVOG_POLAZNIKA:
+                            try {
+                                OpstiDomenskiObjekat polaznik = Kontroler.vratiInstancu().kreirajNovogPolaznika();
+                                sto.setSignal(true);
+                                sto.setPodaci(polaznik);
+                                sto.setPoruka("Sistem je kreirao novog polaznika!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.ZAPAMTI_POLAZNIKA:
+                            try {
+                                OpstiDomenskiObjekat polaznik = (Polaznik) kto.getPodaci();
+                                Kontroler.vratiInstancu().zapamtiPolaznika(polaznik);
+                                sto.setSignal(true);
+                                sto.setPoruka("Sistem je zapamtio podatke o polazniku!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.PRETRAZI_POLAZNIKE:
+                            try {
+                                OpstiDomenskiObjekat polaznik = (Polaznik) kto.getPodaci();
+                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().pretraziPolaznike(polaznik);
+                                sto.setSignal(true);
+                                sto.setPodaci(lista);
+                                sto.setPoruka("Sistem je pronasao polaznike po zadatoj vrednosti!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.PRONADJI_POLAZNIKA:
+                            try {
+                                OpstiDomenskiObjekat p = (Polaznik) kto.getPodaci();
+                                OpstiDomenskiObjekat polaznik = Kontroler.vratiInstancu().pronadjiPolaznika(p);
+                                sto.setSignal(true);
+                                sto.setPodaci(polaznik);
+                                sto.setPoruka("Sistem je pronasao podatke o polazniku!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.KREIRAJ_NOVI_UGOVOR:
+                            try {
+                                OpstiDomenskiObjekat ugovor = (Ugovor) kto.getPodaci();
+                                Kontroler.vratiInstancu().noviUgovor(ugovor);
+                                sto.setSignal(true);
+                                sto.setPoruka("Sistem je kreirao novi ugovor!");
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        case Konstante.DAJ_KURSEVE:
+                            try {
+                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().dajKurseve();
+                                sto.setSignal(true);
+                                sto.setPodaci(lista);
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
+                        
                     }
                     outSoket = new ObjectOutputStream(s.getOutputStream());
                     outSoket.writeObject(sto);

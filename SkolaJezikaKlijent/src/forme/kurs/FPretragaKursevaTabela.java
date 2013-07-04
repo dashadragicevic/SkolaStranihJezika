@@ -5,23 +5,14 @@
 package forme.kurs;
 
 import domen.Kurs;
-import domen.Nivo;
-import domen.StraniJezik;
 import forme.kurs.ki.KontrolorKIDajSveJezike;
 import forme.kurs.ki.KontrolorKIDajSveNivoe;
 import forme.kurs.ki.KontrolorKIPretraziKurseve;
 import forme.kurs.ki.KontrolorKIPronadjiKurs;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import konstante.Konstante;
 import tabela.model.ModelTabeleKurs;
-import transfer.KlijentTransferObjekat;
-import transfer.ServerTransferObjekat;
 
 /**
  *
@@ -35,8 +26,9 @@ public class FPretragaKursevaTabela extends javax.swing.JDialog {
     public FPretragaKursevaTabela(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+        setLocationRelativeTo(null);
         srediFormu();
-        popuniTabeluKurs();
+        popuniTabeluKurs();        
     }
 
     /**
@@ -58,6 +50,7 @@ public class FPretragaKursevaTabela extends javax.swing.JDialog {
         jbtnDetalji = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Pretraga kurseva");
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);

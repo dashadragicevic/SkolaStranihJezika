@@ -5,13 +5,16 @@
 package domen;
 
 import java.io.Serializable;
-import java.sql.Date;
+import java.sql.ResultSet;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 /**
  *
  * @author Dasa
  */
-public class Ugovor implements Serializable {
+public class Ugovor implements Serializable, OpstiDomenskiObjekat {
     
     private Polaznik polaznik;
     private long ugovorID;
@@ -98,6 +101,68 @@ public class Ugovor implements Serializable {
 
     public void setKurs(Kurs kurs) {
         this.kurs = kurs;
+    }
+
+    @Override
+    public String vratiImeTabele() {
+        return "Ugovor";
+    }
+
+    @Override
+    public String vratiKoloneZaInsert() {
+        return "(PolaznikID, UgovorID, BrojRata, IznosRate, RokZaSlRatu, UkupnoPlacenoRata, UkupnoPlaceno, KursID)";
+    }
+
+    @Override
+    public String vratiVrednostZaInsert() {
+        return polaznik.getPolaznikID()+","+ugovorID+","+brojRata+","+iznosRate+",'"+new java.sql.Date(rokZaSlRatu.getTime())+"',"+ukupnoPlacenoRata+","+ukupnoPlaceno+","+kurs.getKursID();
+    }
+
+    @Override
+    public List<OpstiDomenskiObjekat> vratiListuIzResultSeta(ResultSet rs) {
+        List<OpstiDomenskiObjekat> lu = new ArrayList<>();
+        try {
+            while (rs.next()) {
+                long uid = rs.getLong("UgovorID");
+                int brr = rs.getInt("BrojRata");
+                double iznr = rs.getDouble("IznosRate");
+                Date rok = rs.getDate("RokZaSlRatu");
+                int upr = rs.getInt("UkupnoPlacenoRata");
+                double up = rs.getDouble("UkupnoPlaceno");
+                long kid = rs.getLong("KursID");
+
+                Ugovor u = new Ugovor();
+                u.setBrojRata(brr);
+                u.setIznosRate(iznr);
+                Kurs k = new Kurs();
+                k.setKursID(kid);
+                u.setKurs(k);
+                u.setRokZaSlRatu(rok);
+                u.setUgovorID(uid);
+                u.setUkupnoPlaceno(up);
+                u.setUkupnoPlacenoRata(upr);
+
+                lu.add(u);
+            }
+        } catch (Exception e) {
+            System.out.println("Sistem ne moze da nadje ugovor po zadatoj vrednosti!");
+        }
+        return lu;
+    }
+
+    @Override
+    public String vratiVrednostZaWhere() {
+        return "PolaznikID="+polaznik.getPolaznikID()+" AND UgovorID="+ugovorID;
+    }
+
+    @Override
+    public String vratiVrednostiZaUpdate() {
+        return "BrojRata="+brojRata+", IznosRate="+iznosRate+", RokZaSlRatu='"+new java.sql.Date(rokZaSlRatu.getTime())+"', UkupnoPlacenoRata="+ukupnoPlacenoRata+", UkupnoPlaceno="+ukupnoPlaceno+", KursID="+kurs.getKursID();
+    }
+
+    @Override
+    public String vratiVrednostZaWhereZaPretragu() {
+        return "PolaznikID="+polaznik.getPolaznikID();
     }
     
 }

@@ -56,6 +56,11 @@ public class Mesto implements Serializable, OpstiDomenskiObjekat {
     }
 
     @Override
+    public String toString() {
+        return nazivMesta;
+    }
+
+    @Override
     public String vratiImeTabele() {
         return "Mesto";
     }

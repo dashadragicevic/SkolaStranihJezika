@@ -6,7 +6,7 @@
       <SubComponents>
         <Menu class="javax.swing.JMenu" name="jmPocetak">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Pocetak"/>
+            <Property name="text" type="java.lang.String" value="Kurs"/>
           </Properties>
           <SubComponents>
             <MenuItem class="javax.swing.JMenuItem" name="jmiUnosKursa">
@@ -19,7 +19,7 @@
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="jmiPretragaKursevaTabela">
               <Properties>
-                <Property name="text" type="java.lang.String" value="Pretraga kurseva - tabela"/>
+                <Property name="text" type="java.lang.String" value="Pretraga kurseva"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPretragaKursevaTabelaActionPerformed"/>
@@ -33,6 +33,29 @@
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiKrajActionPerformed"/>
+              </Events>
+            </MenuItem>
+          </SubComponents>
+        </Menu>
+        <Menu class="javax.swing.JMenu" name="jmPolaznik">
+          <Properties>
+            <Property name="text" type="java.lang.String" value=" Polaznik"/>
+          </Properties>
+          <SubComponents>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiNoviPolaznik">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Novi polaznik"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiNoviPolaznikActionPerformed"/>
+              </Events>
+            </MenuItem>
+            <MenuItem class="javax.swing.JMenuItem" name="jmiPretragaPolaznika">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="Pretraga polaznika"/>
+              </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jmiPretragaPolaznikaActionPerformed"/>
               </Events>
             </MenuItem>
           </SubComponents>

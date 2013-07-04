@@ -26,6 +26,8 @@ public class FUnosKursa extends javax.swing.JDialog {
         super(parent, modal);
         initComponents();
         srediFormu();
+        setLocationRelativeTo(null);
+        jlKursID.setVisible(false);
     }
 
     /**
@@ -38,7 +40,6 @@ public class FUnosKursa extends javax.swing.JDialog {
     private void initComponents() {
 
         jpPodaciOKursu = new javax.swing.JPanel();
-        jlKursIDLabela = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -88,10 +89,8 @@ public class FUnosKursa extends javax.swing.JDialog {
         jbNoviKurs = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Unos podataka o kursu");
+        setTitle("Podaci o kursu");
         setResizable(false);
-
-        jlKursIDLabela.setText("Kurs ID:");
 
         jLabel2.setText("Strani jezik:");
 
@@ -176,7 +175,6 @@ public class FUnosKursa extends javax.swing.JDialog {
             .addGroup(jpPodaciOKursuLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jpPodaciOKursuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jlKursIDLabela)
                     .addComponent(jLabel2)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
@@ -249,9 +247,8 @@ public class FUnosKursa extends javax.swing.JDialog {
             jpPodaciOKursuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jpPodaciOKursuLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jpPodaciOKursuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jlKursIDLabela, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jlKursID, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jlKursID, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(jlStraniJezikGreska)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpPodaciOKursuLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -407,7 +404,7 @@ public class FUnosKursa extends javax.swing.JDialog {
     private void jbSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSacuvajActionPerformed
         // TODO add your handling code here:
         KontrolorKISacuvajKurs.sacuvajKurs(jlKursID, jcbStraniJezik, jlStraniJezikGreska, jcbNivo, jlNivoGreska, jcbNastavnik, jlNastavnikGreska, jtxtFondCasova, jlFondCasovaGreska, jcbTermin1Dan, jlTermin1Greska, jspnTermin1Cas, jspnTermin1Min, jcbTermin2Dan, jlTermin2Greska, jspnTermin2Cas, jspnTermin2Min, jdpDatumPocetka, jlDatumPocetkaGreska, jdpDatumZavrsetka, jlDatumZavrsetkaGreska, jtxtNazivUdzbenika, jlNazivUdzbenikaGreska, jtxtCenaKursa, jlCenaKursaGreska);
-        this.dispose();
+        //this.dispose();
     }//GEN-LAST:event_jbSacuvajActionPerformed
 
     private void jbIzmeniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbIzmeniActionPerformed
@@ -513,7 +510,6 @@ public class FUnosKursa extends javax.swing.JDialog {
     private javax.swing.JLabel jlDatumZavrsetkaGreska;
     private javax.swing.JLabel jlFondCasovaGreska;
     private javax.swing.JLabel jlKursID;
-    private javax.swing.JLabel jlKursIDLabela;
     private javax.swing.JLabel jlNastavnikGreska;
     private javax.swing.JLabel jlNazivUdzbenikaGreska;
     private javax.swing.JLabel jlNivoGreska;
@@ -568,9 +564,6 @@ public class FUnosKursa extends javax.swing.JDialog {
     }
 
     public void onemoguciUnos() {
-        jlKursIDLabela.setVisible(true);
-        jlKursID.setVisible(true);
-
         jcbStraniJezik.setEnabled(false);
         jcbNivo.setEnabled(false);
         jcbNastavnik.setEnabled(false);
@@ -600,9 +593,6 @@ public class FUnosKursa extends javax.swing.JDialog {
     }
 
     public void omoguciUnos() {
-        jlKursIDLabela.setVisible(true);
-        jlKursID.setVisible(true);
-
         jcbStraniJezik.setEnabled(true);
         jcbNivo.setEnabled(true);
         jcbNastavnik.setEnabled(true);

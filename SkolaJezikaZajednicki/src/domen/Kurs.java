@@ -152,7 +152,7 @@ public class Kurs implements Serializable, OpstiDomenskiObjekat {
 
     @Override
     public String toString() {
-        return termin1 + ", " + termin2 + ", cena: " + cena;
+        return jezik.getNazivJezika()+" "+nivo.getOznakaNivoa()+" "+termin1+" "+termin2;
     }
 
     @Override

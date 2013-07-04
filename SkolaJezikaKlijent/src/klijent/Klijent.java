@@ -4,7 +4,7 @@
  */
 package klijent;
 
-import forme.kurs.FPocetnaKurs;
+import forme.pocetna.FPocetna;
 import java.io.IOException;
 import java.net.Socket;
 import java.net.UnknownHostException;
@@ -26,7 +26,7 @@ public class Klijent {
             Socket socket = new Socket("127.0.0.1", 9876);
             Kontroler.vratiInstancu().setSocket(socket);
             
-            FPocetnaKurs fPocetnaKurs = new FPocetnaKurs();
+            FPocetna fPocetnaKurs = new FPocetna();
             fPocetnaKurs.setVisible(true);
         } catch (UnknownHostException ex) {
             Logger.getLogger(Klijent.class.getName()).log(Level.SEVERE, null, ex);

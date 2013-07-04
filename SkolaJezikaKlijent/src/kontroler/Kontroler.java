@@ -5,6 +5,8 @@
 package kontroler;
 
 import domen.Kurs;
+import domen.Polaznik;
+import domen.Ugovor;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
@@ -137,4 +139,94 @@ public class Kontroler {
         ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
         return sto;
     }
+    
+    public ServerTransferObjekat dajSvaMesta() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.DAJ_MESTA);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat noviPolaznik() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.KREIRAJ_NOVOG_POLAZNIKA);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat sacuvajPolaznika(Polaznik polaznik) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.ZAPAMTI_POLAZNIKA);
+        kto.setPodaci(polaznik);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat pretraziPolaznike(Polaznik polaznik) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.PRETRAZI_POLAZNIKE);
+        kto.setPodaci(polaznik);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+
+    public ServerTransferObjekat pronadjiPolaznika(Polaznik polaznik) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.PRONADJI_POLAZNIKA);
+        kto.setPodaci(polaznik);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    public ServerTransferObjekat noviUgovor(Ugovor ugovor) throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.KREIRAJ_NOVI_UGOVOR);
+        kto.setPodaci(ugovor);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+
+    public ServerTransferObjekat dajSveKurseve() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.DAJ_KURSEVE);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
+    
 }
