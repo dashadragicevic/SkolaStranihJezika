@@ -104,4 +104,9 @@ public class Nivo implements Serializable, OpstiDomenskiObjekat {
         return "";
     }
 
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "NivoID = "+nivoID;
+    }
+
 }

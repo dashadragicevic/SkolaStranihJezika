@@ -211,6 +211,16 @@ public class NitKlijent extends Thread {
                                 sto.setPoruka(e.getMessage());
                             }
                             break;
+                        case Konstante.DAJ_POLAZNIKE:
+                            try {
+                                List<OpstiDomenskiObjekat> lista = Kontroler.vratiInstancu().dajPolaznike();
+                                sto.setSignal(true);
+                                sto.setPodaci(lista);
+                            } catch (Exception e) {
+                                sto.setSignal(false);
+                                sto.setPoruka(e.getMessage());
+                            }
+                            break;
 
                         case Konstante.KREIRAJ_NOVOG_ZAPOSLENOG:
                             try {

@@ -402,7 +402,7 @@ public class FUnosKursa extends javax.swing.JDialog {
 
     private void jbSacuvajActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbSacuvajActionPerformed
         // TODO add your handling code here:
-        KontrolorKISacuvajKurs.sacuvajKurs(jlKursID, jcbStraniJezik, jlStraniJezikGreska, jcbNivo, jlNivoGreska, jcbNastavnik, jlNastavnikGreska, jtxtFondCasova, jlFondCasovaGreska, jcbTermin1Dan, jlTermin1Greska, jspnTermin1Cas, jspnTermin1Min, jcbTermin2Dan, jlTermin2Greska, jspnTermin2Cas, jspnTermin2Min, jdpDatumPocetka, jlDatumPocetkaGreska, jdpDatumZavrsetka, jlDatumZavrsetkaGreska, jtxtNazivUdzbenika, jlNazivUdzbenikaGreska, jtxtCenaKursa, jlCenaKursaGreska);
+        KontrolorKISacuvajKurs.sacuvajKurs(this, jlKursID, jcbStraniJezik, jlStraniJezikGreska, jcbNivo, jlNivoGreska, jcbNastavnik, jlNastavnikGreska, jtxtFondCasova, jlFondCasovaGreska, jcbTermin1Dan, jlTermin1Greska, jspnTermin1Cas, jspnTermin1Min, jcbTermin2Dan, jlTermin2Greska, jspnTermin2Cas, jspnTermin2Min, jdpDatumPocetka, jlDatumPocetkaGreska, jdpDatumZavrsetka, jlDatumZavrsetkaGreska, jtxtNazivUdzbenika, jlNazivUdzbenikaGreska, jtxtCenaKursa, jlCenaKursaGreska);
         //this.dispose();
     }//GEN-LAST:event_jbSacuvajActionPerformed
 
@@ -628,6 +628,43 @@ public class FUnosKursa extends javax.swing.JDialog {
         jbIzmeni.setVisible(false);
         jbObrisi.setVisible(false);
         jbNoviKurs.setVisible(false);
+    }
+    
+    public void ocistiFormu(){
+        jlKursID.setText("");
+        jcbStraniJezik.setSelectedIndex(0);
+        jlStraniJezikGreska.setText("*");
+        jcbNivo.setSelectedIndex(0); 
+        jlNivoGreska.setText("*");
+        jcbNastavnik.setSelectedIndex(0);
+        jlNastavnikGreska.setText("*"); 
+        jtxtFondCasova.setText(""); 
+        jlFondCasovaGreska.setText("*"); 
+        jcbTermin1Dan.setSelectedIndex(0); 
+        jlTermin1Greska.setText("*"); 
+        jspnTermin1Cas.setValue(8);
+        jspnTermin1Min.setValue(0);
+        jcbTermin2Dan.setSelectedIndex(0);
+        jlTermin2Greska.setText("*"); 
+        jspnTermin2Cas.setValue(8);
+        jspnTermin2Min.setValue(0);
+        jdpDatumPocetka.setDate(null);
+        jlDatumPocetkaGreska.setText("*"); 
+        jdpDatumZavrsetka.setDate(null);
+        jlDatumZavrsetkaGreska.setText("*"); 
+        jtxtNazivUdzbenika.setText(""); 
+        jlNazivUdzbenikaGreska.setText("*"); 
+        jtxtCenaKursa.setText("");
+        jlCenaKursaGreska.setText("*");
+        
+        onemoguciUnos();
+        
+        jbNoviKurs.setVisible(true);
+        jbNoviKurs.setEnabled(true);
+        
+        jbIzmeni.setVisible(false);
+        jbObrisi.setVisible(false);
+        jbSacuvaj.setVisible(false); 
     }
     
 }

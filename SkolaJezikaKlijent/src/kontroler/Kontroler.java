@@ -280,4 +280,28 @@ public class Kontroler {
         return sto;
     }
     
+    public ServerTransferObjekat dajSveZaposlene() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.DAJ_ZAPOSLENE);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+     
+    public ServerTransferObjekat dajSvePolaznike() throws Exception {
+        KlijentTransferObjekat kto = new KlijentTransferObjekat();
+        kto.setOperacija(Konstante.DAJ_POLAZNIKE);
+
+        outSocket = new ObjectOutputStream(socket.getOutputStream());
+        outSocket.writeObject(kto);
+
+        inSocket = new ObjectInputStream(socket.getInputStream());
+        ServerTransferObjekat sto = (ServerTransferObjekat) inSocket.readObject();
+        return sto;
+    }
+    
 }

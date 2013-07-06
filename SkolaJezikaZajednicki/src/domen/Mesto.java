@@ -106,4 +106,9 @@ public class Mesto implements Serializable, OpstiDomenskiObjekat {
         return "";
     }
 
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "PttBroj = "+pttBroj;
+    }
+
 }

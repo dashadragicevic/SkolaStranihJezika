@@ -8,8 +8,10 @@ import domen.Kurs;
 import domen.Nivo;
 import domen.StraniJezik;
 import domen.Zaposleni;
+import forme.kurs.FUnosKursa;
 import java.util.Date;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JSpinner;
@@ -24,7 +26,7 @@ import transfer.ServerTransferObjekat;
  */
 public class KontrolorKISacuvajKurs {
 
-    public static void sacuvajKurs(JLabel jlKursID, JComboBox jcbStraniJezik, JLabel jlStraniJezikGreska, JComboBox jcbNivo,
+    public static void sacuvajKurs(FUnosKursa forma, JLabel jlKursID, JComboBox jcbStraniJezik, JLabel jlStraniJezikGreska, JComboBox jcbNivo,
             JLabel jlNivoGreska, JComboBox jcbNastavnik, JLabel jlNastavnikGreska, JTextField jtxtFondCasova, JLabel jlFondCasovaGreska,
             JComboBox jcbTermin1Dan, JLabel jlTermin1Greska, JSpinner jspnTermin1Cas, JSpinner jspnTermin1Min, JComboBox jcbTermin2Dan,
             JLabel jlTermin2Greska, JSpinner jspnTermin2Cas, JSpinner jspnTermin2Min, JXDatePicker jdpDatumPocetka, JLabel jlDatumPocetkaGreska,
@@ -135,6 +137,14 @@ public class KontrolorKISacuvajKurs {
             } else {
                 jlDatumZavrsetkaGreska.setText("*");
             }
+            if(datumOd!=null && datumDo!=null && datumOd.compareTo(datumDo)>=0){
+                jlDatumPocetkaGreska.setText("Datum pocetka mora biti pre datuma zavrsetka!");
+                jlDatumZavrsetkaGreska.setText("Datum zavrsetka mora biti posle datuma zavrsetka!");
+                izuzetak = (true || izuzetak);
+            } else {
+                jlDatumPocetkaGreska.setText("*");
+                jlDatumZavrsetkaGreska.setText("*");
+            }
             if (nazivUdzbenika.isEmpty()) {
                 jlNazivUdzbenikaGreska.setText("Naziv udzbenika je obavezno polje!");
                 izuzetak = (true || izuzetak);
@@ -181,6 +191,7 @@ public class KontrolorKISacuvajKurs {
 
             if (sto.isSignal()) {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+                forma.ocistiFormu();
             } else {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
             }

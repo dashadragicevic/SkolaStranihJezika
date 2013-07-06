@@ -26,7 +26,7 @@ public class KontrolorKIDajSveKurseve {
                 for (Kurs k : lista) {
                     jcbbKurs.addItem(k);
                 }
-                jcbbKurs.setSelectedItem(lista.get(0));
+                jcbbKurs.setSelectedIndex(0);
             } else {
                 throw new Exception();
             }

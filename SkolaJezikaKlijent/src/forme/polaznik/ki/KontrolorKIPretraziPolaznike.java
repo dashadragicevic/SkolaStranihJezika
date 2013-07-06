@@ -25,41 +25,17 @@ public class KontrolorKIPretraziPolaznike {
             String prezime = jtxtPrezime.getText().trim();
             String jmbg = jtxtJMBG.getText().trim();
 
+            ServerTransferObjekat sto = null;
             if (ime.isEmpty() && prezime.isEmpty() && jmbg.isEmpty()) {
-                throw new Exception("Morate uneti podatke u bar jedno polje za pretragu!");
+                sto = Kontroler.vratiInstancu().dajSvePolaznike();
+            } else {
+                Polaznik polaznik = new Polaznik();
+                polaznik.setIme(ime);
+                polaznik.setPrezime(prezime);
+                polaznik.setJMBG(jmbg);
+
+                sto = Kontroler.vratiInstancu().pretraziPolaznike(polaznik);
             }
-
-            if (!jmbg.isEmpty()) {
-                if (jmbg.length() < 13 || jmbg.length() > 13) {
-                    throw new Exception("JMBG mora imati 13 cifara!");
-                } else {
-                    String sdan = jmbg.substring(0, 2);
-                    String smesec = jmbg.substring(2, 4);
-                    String sgodina = jmbg.substring(4, 7);
-                    String sostalo = jmbg.substring(7, 13);
-
-                    try {
-                        int dan = Integer.parseInt(sdan);
-                        int mesec = Integer.parseInt(smesec);
-                        int godina = Integer.parseInt(sgodina);
-                        long ostalo = Long.parseLong(sostalo);
-
-                        if (dan > 31 || mesec > 12 || godina < 900) {
-                            throw new Exception("JMBG nije unet u ispravnom formatu!");
-                        }
-                    } catch (Exception e) {
-                        throw new Exception("JMBG nije unet u ispravnom formatu!");
-                    }
-                }
-            }
-
-            Polaznik polaznik = new Polaznik();
-            polaznik.setIme(ime);
-            polaznik.setPrezime(prezime);
-            polaznik.setJMBG(jmbg);
-
-            ServerTransferObjekat sto = Kontroler.vratiInstancu().pretraziPolaznike(polaznik);
-
             List<Polaznik> lista = null;
             if (sto.isSignal()) {
                 //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);

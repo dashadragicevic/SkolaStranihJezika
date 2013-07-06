@@ -23,7 +23,8 @@ public class FNoviZaposleni extends javax.swing.JDialog {
     /**
      * Creates new form FNoviPolaznik
      */
-    public FNoviZaposleni() {
+    public FNoviZaposleni(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         srediFormu();
         jlPolaznikID.setVisible(false);
@@ -369,7 +370,7 @@ public class FNoviZaposleni extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FNoviPolaznik().setVisible(true);
+                new FNoviPolaznik(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }

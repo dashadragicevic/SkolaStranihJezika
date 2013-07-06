@@ -164,5 +164,10 @@ public class Ugovor implements Serializable, OpstiDomenskiObjekat {
     public String vratiVrednostZaWhereZaPretragu() {
         return "PolaznikID="+polaznik.getPolaznikID();
     }
+
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "PolaznikID="+polaznik.getPolaznikID();
+    }
     
 }

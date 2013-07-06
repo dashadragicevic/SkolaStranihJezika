@@ -93,4 +93,9 @@ public class StraniJezik implements Serializable, OpstiDomenskiObjekat {
         return "";
     }
 
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "JezikID = "+jezikID;
+    }
+
 }

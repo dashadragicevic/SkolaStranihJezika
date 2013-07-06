@@ -90,7 +90,7 @@ public class DBKomunikacija {
         return odo.vratiListuIzResultSeta(rs);
     }
 
-    public List<OpstiDomenskiObjekat> vratiObjektePoKriterijumu(OpstiDomenskiObjekat odo) throws Exception {
+    public List<OpstiDomenskiObjekat> vratiObjektePoIDu(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "SELECT * FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaWhere();
         System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
@@ -107,7 +107,7 @@ public class DBKomunikacija {
     }
 
     public void obrisiObjekat(OpstiDomenskiObjekat odo) throws Exception {
-        String sql = "DELETE FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaWhere();
+        String sql = "DELETE FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaDelete();
         System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         sqlNaredba.executeUpdate(sql);

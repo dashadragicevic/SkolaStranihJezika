@@ -4,13 +4,14 @@
  */
 package forme.polaznik;
 
+import domen.Kurs;
 import domen.Polaznik;
 import domen.Ugovor;
 import forme.polaznik.ki.KontrolorKIDajSvaMesta;
 import forme.polaznik.ki.KontrolorKIDajSveKurseve;
 import forme.polaznik.ki.KontrolorKINoviPolaznik;
-import forme.polaznik.ki.KontrolorKINoviUgovor;
 import forme.polaznik.ki.KontrolorKISacuvajPolaznika;
+import java.util.Date;
 import javax.swing.DefaultCellEditor;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
@@ -28,7 +29,8 @@ public class FNoviPolaznik extends javax.swing.JDialog {
     /**
      * Creates new form FNoviPolaznik
      */
-    public FNoviPolaznik() {
+    public FNoviPolaznik(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         srediFormu();
         jlPolaznikID.setVisible(false);
@@ -75,6 +77,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jScrollPane1 = new javax.swing.JScrollPane();
         jtblUgovori = new javax.swing.JTable();
         jbtnNoviUgovor = new javax.swing.JButton();
+        jbtnObrisiUgovor = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Podaci o polazniku");
@@ -260,6 +263,13 @@ public class FNoviPolaznik extends javax.swing.JDialog {
             }
         });
 
+        jbtnObrisiUgovor.setText("-");
+        jbtnObrisiUgovor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jbtnObrisiUgovorActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -269,6 +279,8 @@ public class FNoviPolaznik extends javax.swing.JDialog {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jbtnNoviUgovor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jbtnObrisiUgovor)
                         .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 792, Short.MAX_VALUE))
                 .addContainerGap())
@@ -276,7 +288,9 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jbtnNoviUgovor)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jbtnNoviUgovor)
+                    .addComponent(jbtnObrisiUgovor))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -335,6 +349,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
 
         JComboBox jcbbKurs = new JComboBox();
         KontrolorKIDajSveKurseve.dajSveKurseve(jcbbKurs);
+        jcbbKurs.setSelectedIndex(0);
         TableColumn tc2 = tcm.getColumn(1);
         tc2.setCellEditor(new DefaultCellEditor(jcbbKurs));
     }//GEN-LAST:event_jbtnNoviPolaznikActionPerformed
@@ -365,8 +380,36 @@ public class FNoviPolaznik extends javax.swing.JDialog {
 
     private void jbtnNoviUgovorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnNoviUgovorActionPerformed
         // TODO add your handling code here:
-        KontrolorKINoviUgovor.noviUgovor(jtblUgovori);
+        ModelTabeleUgovori mtu = (ModelTabeleUgovori) jtblUgovori.getModel();
+        Polaznik p = mtu.vratiPolaznika();
+        Ugovor u = new Ugovor();
+        u.setPolaznik(p);
+        if (p.getUgovori().size() == 0) {
+            u.setUgovorID(1);
+        } else {
+            u.setUgovorID(p.getUgovori().get(p.getUgovori().size() - 1).getUgovorID() + 1);
+        }
+        u.setBrojRata(0);
+        u.setIznosRate(0);
+        Kurs k = new Kurs();
+        k.setKursID(1);
+        u.setKurs(k);
+        u.setRokZaSlRatu(new Date());
+        u.setUkupnoPlaceno(0);
+        u.setUkupnoPlacenoRata(0);
+        mtu.dodajRed(u);
     }//GEN-LAST:event_jbtnNoviUgovorActionPerformed
+
+    private void jbtnObrisiUgovorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jbtnObrisiUgovorActionPerformed
+        // TODO add your handling code here:
+        ModelTabeleUgovori mtu = (ModelTabeleUgovori) jtblUgovori.getModel();
+        int i = jtblUgovori.getSelectedRow();
+        if (i == -1) {
+            JOptionPane.showMessageDialog(this, "Niste odarali nijedan ugovor!", "Greska", JOptionPane.ERROR_MESSAGE);
+        } else {
+            mtu.obrisiRed(i);
+        }
+    }//GEN-LAST:event_jbtnObrisiUgovorActionPerformed
 
     /**
      * @param args the command line arguments
@@ -398,7 +441,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FNoviPolaznik().setVisible(true);
+                new FNoviPolaznik(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }
@@ -416,6 +459,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JButton jbtnNoviPolaznik;
     private javax.swing.JButton jbtnNoviUgovor;
+    private javax.swing.JButton jbtnObrisiUgovor;
     private javax.swing.JButton jbtnOmoguciIzmenu;
     private javax.swing.JButton jbtnSacuvaj;
     private javax.swing.JComboBox jcbbMesto;
@@ -485,6 +529,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jbtnNoviPolaznik.setVisible(false);
 
         jbtnNoviUgovor.setEnabled(false);
+        jbtnObrisiUgovor.setEnabled(false);
 
         jtblUgovori.setEnabled(false);
     }
@@ -509,6 +554,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         jbtnNoviPolaznik.setVisible(false);
 
         jbtnNoviUgovor.setEnabled(true);
+        jbtnObrisiUgovor.setEnabled(true);
 
         jtblUgovori.setEnabled(true);
     }

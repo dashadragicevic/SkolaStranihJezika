@@ -5,7 +5,6 @@
 package so.ugovor;
 
 import baza.DBKomunikacija;
-import domen.OpstiDomenskiObjekat;
 import domen.Ugovor;
 import so.OpstaSO;
 

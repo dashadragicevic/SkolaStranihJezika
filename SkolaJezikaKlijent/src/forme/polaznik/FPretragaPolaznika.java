@@ -16,12 +16,13 @@ import tabela.model.ModelTabelePolaznik;
  *
  * @author Dasa
  */
-public class FPretragaPolaznika extends javax.swing.JFrame {
+public class FPretragaPolaznika extends javax.swing.JDialog {
 
     /**
      * Creates new form FPretragaPolaznika
      */
-    public FPretragaPolaznika() {
+    public FPretragaPolaznika(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         popuniTabeluPolaznik();
         setLocationRelativeTo(null);
@@ -181,7 +182,7 @@ public class FPretragaPolaznika extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FPretragaPolaznika().setVisible(true);
+                new FPretragaPolaznika(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }

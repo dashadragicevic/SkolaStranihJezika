@@ -35,4 +35,6 @@ public class Konstante {
     public static final int PRETRAZI_ZAPOSLENE = 19;
     public static final int PRONADJI_ZAPOSLENOG = 20;
     
+    public static final int DAJ_POLAZNIKE = 21;
+    
 }

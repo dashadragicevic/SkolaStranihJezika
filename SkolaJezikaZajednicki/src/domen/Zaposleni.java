@@ -290,27 +290,32 @@ public class Zaposleni implements Serializable, OpstiDomenskiObjekat {
     public String vratiVrednostZaWhereZaPretragu() {
         String s = "";
         if(!"".equals(ime)&&"".equals(prezime)&&"".equals(JMBG)){
-            s = "Ime = '"+ime+"'";
+            s = "Ime LIKE '%"+ime+"%'";
         }
         else if("".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
-            s = "Prezime = '"+prezime+"'";
+            s = "Prezime LIKE '%"+prezime+"%'";
         }
         else if("".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
-            s = "JMBG = '"+JMBG+"'";
+            s = "JMBG LIKE '%"+JMBG+"%'";
         }
         else if(!"".equals(ime)&&!"".equals(prezime)&&"".equals(JMBG)){
-            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"'";
+            s = "Ime LIKE '%"+ime+"%' AND Prezime LIKE '%"+prezime+"%'";
         }
         else if(!"".equals(ime)&&"".equals(prezime)&&!"".equals(JMBG)){
-            s = "Ime = '"+ime+"' AND JMBG = '"+JMBG+"'";
+            s = "Ime LIKE '%"+ime+"%' AND JMBG LIKE '%"+JMBG+"%'";
         }
         else if("".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
-            s = "Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+            s = "Prezime LIKE '%"+prezime+"%' AND JMBG LIKE '%"+JMBG+"%'";
         }
         else if(!"".equals(ime)&&!"".equals(prezime)&&!"".equals(JMBG)){
-            s = "Ime = '"+ime+"' AND Prezime = '"+prezime+"' AND JMBG = '"+JMBG+"'";
+            s = "Ime LIKE '%"+ime+"%' AND Prezime LIKE '%"+prezime+"%' AND JMBG LIKE '%"+JMBG+"%'";
         }
         return s;
+    }
+
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "ZaposleniID = "+zaposleniID;
     }
     
 }

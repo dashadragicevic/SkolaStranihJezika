@@ -29,7 +29,7 @@ public class KontrolorKIPronadjiZaposlenog {
                 //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
                 
                 Zaposleni zap = (Zaposleni) sto.getPodaci();                
-                FNoviZaposleni formaPrikaz = new FNoviZaposleni();
+                FNoviZaposleni formaPrikaz = new FNoviZaposleni(null, true);
                 formaPrikaz.popuniPodatke(zap);
                 formaPrikaz.onemoguciUnos();
                 //formaPrikaz.setAlwaysOnTop(true);

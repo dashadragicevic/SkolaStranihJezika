@@ -29,7 +29,7 @@ public class KontrolorKIPronadjiPolaznika {
                 //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
                 
                 Polaznik polaznik = (Polaznik) sto.getPodaci();                
-                FNoviPolaznik formaPrikaz = new FNoviPolaznik();
+                FNoviPolaznik formaPrikaz = new FNoviPolaznik(null, true);
                 formaPrikaz.popuniPodatke(polaznik);
                 formaPrikaz.onemoguciUnos();
                 //formaPrikaz.setAlwaysOnTop(true);

@@ -28,7 +28,7 @@ public class KontrolorKIPronadjiKurs {
             ServerTransferObjekat sto = Kontroler.vratiInstancu().pronadjiKurs(k);
             
             if (sto.isSignal()) {
-                //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+                JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
                 
                 Kurs kurs = (Kurs) sto.getPodaci();                
                 FUnosKursa formaPrikaz = new FUnosKursa(null, true);
@@ -37,7 +37,7 @@ public class KontrolorKIPronadjiKurs {
                 
                 formaPrikaz.setVisible(true);
             } else {
-                //JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Greska pri ucitavanju kursa: " + ex.getMessage());

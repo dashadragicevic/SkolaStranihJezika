@@ -21,12 +21,13 @@ import tabela.model.ModelTabeleZaposleni;
  *
  * @author Dasa
  */
-public class FPretragaZaposlenih extends javax.swing.JFrame {
+public class FPretragaZaposlenih extends javax.swing.JDialog {
 
     /**
      * Creates new form FPretragaPolaznika
      */
-    public FPretragaZaposlenih() {
+    public FPretragaZaposlenih(java.awt.Frame parent, boolean modal) {
+        super(parent, modal);
         initComponents();
         popuniTabeluZaposleni();
     }
@@ -52,7 +53,7 @@ public class FPretragaZaposlenih extends javax.swing.JFrame {
         jbtnDetalji = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Pretraga polaznika");
+        setTitle("Pretraga zaposlenih");
 
         jLabel1.setText("Ime:");
 
@@ -185,7 +186,7 @@ public class FPretragaZaposlenih extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new FPretragaPolaznika().setVisible(true);
+                new FPretragaPolaznika(new javax.swing.JFrame(), true).setVisible(true);
             }
         });
     }

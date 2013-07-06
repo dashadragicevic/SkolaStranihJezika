@@ -5,6 +5,7 @@
 package so.polaznik;
 
 import baza.DBKomunikacija;
+import domen.Mesto;
 import domen.OpstiDomenskiObjekat;
 import domen.Polaznik;
 import java.util.List;
@@ -26,6 +27,10 @@ public class PretraziPolaznikeSO extends OpstaSO {
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         lista = DBKomunikacija.vratiObjekat().vratiObjektePretraga((Polaznik)o);
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
+            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) listaMesta.get(0));
+        }
     }
     
     public List<OpstiDomenskiObjekat> getLista() {

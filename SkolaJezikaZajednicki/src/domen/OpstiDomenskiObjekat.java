@@ -27,4 +27,6 @@ public interface OpstiDomenskiObjekat {
     
     String vratiVrednostZaWhereZaPretragu();
     
+    String vratiVrednostZaDelete();
+    
 }

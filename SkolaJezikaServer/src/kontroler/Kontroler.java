@@ -11,9 +11,7 @@ import domen.Nivo;
 import domen.OpstiDomenskiObjekat;
 import domen.Polaznik;
 import domen.StraniJezik;
-import domen.Ugovor;
 import domen.Zaposleni;
-import java.util.ArrayList;
 import java.util.List;
 import so.kurs.NoviKursSO;
 import so.kurs.ObrisiKursSO;
@@ -21,20 +19,15 @@ import so.kurs.PretraziKurseveSO;
 import so.kurs.PronadjiKursSO;
 import so.kurs.VratiSveKurseveSO;
 import so.kurs.ZapamtiKursSO;
-import so.mesto.NadjiMestaPoIduSO;
 import so.mesto.VratiSvaMestaSO;
-import so.nivo.NadjiNivoePoIduSO;
 import so.nivo.VratiNivoeSO;
 import so.polaznik.NoviPolaznikSO;
 import so.polaznik.PretraziPolaznikeSO;
 import so.polaznik.PronadjiPolaznikaSO;
+import so.polaznik.VratiSvePolaznikeSO;
 import so.polaznik.ZapamtiPolaznikaSO;
-import so.stranijezici.NadjiStaneJezikePoIduSO;
 import so.stranijezici.VratiStraneJezikeSO;
 import so.ugovor.NoviUgovorSO;
-import so.ugovor.PretraziUgovoreSO;
-import so.ugovor.ZapamtiUgovorSO;
-import so.zaposleni.NadjiZaposlenePoIduSO;
 import so.zaposleni.NoviZaposleniSO;
 import so.zaposleni.PretraziZaposleneSO;
 import so.zaposleni.PronadjiZaposlenogSO;
@@ -76,17 +69,7 @@ public class Kontroler {
     public List<OpstiDomenskiObjekat> dajZaposlene() throws Exception {
         VratiZaposleneSO vz = new VratiZaposleneSO();
         vz.izvrsiOperaciju(new Zaposleni());
-        List<OpstiDomenskiObjekat> lista = vz.getLista();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
-            nmpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getMesto());
-            ((Zaposleni) opstiDomenskiObjekat).setMesto((Mesto) nmpidu.getLista().get(0));
-
-            NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-            nsjpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getJezik());
-            ((Zaposleni) opstiDomenskiObjekat).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-        }
-        return lista;
+        return vz.getLista();
     }
 
     public OpstiDomenskiObjekat kreirajNoviKurs() throws Exception {
@@ -103,42 +86,13 @@ public class Kontroler {
     public List<OpstiDomenskiObjekat> pretraziKurseve(OpstiDomenskiObjekat kurs) throws Exception {
         PretraziKurseveSO pk = new PretraziKurseveSO();
         pk.izvrsiOperaciju(kurs);
-        List<OpstiDomenskiObjekat> lista = pk.getLista();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-            nsjpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getJezik());
-            ((Kurs) opstiDomenskiObjekat).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-
-            NadjiNivoePoIduSO nnpidu = new NadjiNivoePoIduSO();
-            nnpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getNivo());
-            ((Kurs) opstiDomenskiObjekat).setNivo((Nivo) nnpidu.getLista().get(0));
-
-            NadjiZaposlenePoIduSO nzpidu = new NadjiZaposlenePoIduSO();
-            nzpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getNastavnik());
-            ((Kurs) opstiDomenskiObjekat).setNastavnik((Zaposleni) nzpidu.getLista().get(0));
-        }
-        return lista;
+        return pk.getLista();
     }
 
     public OpstiDomenskiObjekat pronadjiKurs(OpstiDomenskiObjekat kurs) throws Exception {
         PronadjiKursSO pk = new PronadjiKursSO();
         pk.izvrsiOperaciju(kurs);
-        List<OpstiDomenskiObjekat> lista = pk.getLista();
-        OpstiDomenskiObjekat k = lista.get(0);
-
-        NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-        nsjpidu.izvrsiOperaciju(((Kurs) k).getJezik());
-        ((Kurs) k).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-
-        NadjiNivoePoIduSO nnpidu = new NadjiNivoePoIduSO();
-        nnpidu.izvrsiOperaciju(((Kurs) k).getNivo());
-        ((Kurs) k).setNivo((Nivo) nnpidu.getLista().get(0));
-
-        NadjiZaposlenePoIduSO nzpidu = new NadjiZaposlenePoIduSO();
-        nzpidu.izvrsiOperaciju(((Kurs) k).getNastavnik());
-        ((Kurs) k).setNastavnik((Zaposleni) nzpidu.getLista().get(0));
-
-        return k;
+        return pk.getLista().get(0);
     }
 
     public void obrisiKurs(OpstiDomenskiObjekat kurs) throws Exception {
@@ -161,60 +115,24 @@ public class Kontroler {
     public void zapamtiPolaznika(OpstiDomenskiObjekat polaznik) throws Exception {
         ZapamtiPolaznikaSO zp = new ZapamtiPolaznikaSO();
         zp.izvrsiOperaciju(polaznik);
-
-        for (Ugovor ugovor : ((Polaznik) polaznik).getUgovori()) {
-            ZapamtiUgovorSO zu = new ZapamtiUgovorSO();
-            zu.izvrsiOperaciju(ugovor);
-        }
     }
 
     public List<OpstiDomenskiObjekat> pretraziPolaznike(OpstiDomenskiObjekat polaznik) throws Exception {
         PretraziPolaznikeSO pp = new PretraziPolaznikeSO();
         pp.izvrsiOperaciju(polaznik);
-        List<OpstiDomenskiObjekat> lista = pp.getLista();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
-            nmpidu.izvrsiOperaciju(((Polaznik) opstiDomenskiObjekat).getMesto());
-            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) nmpidu.getLista().get(0));
-        }
-        return lista;
+        return pp.getLista();
+    }
+    
+    public List<OpstiDomenskiObjekat> dajPolaznike() throws Exception {
+        VratiSvePolaznikeSO pp = new VratiSvePolaznikeSO();
+        pp.izvrsiOperaciju(new Polaznik());
+        return pp.getLista();
     }
 
     public OpstiDomenskiObjekat pronadjiPolaznika(OpstiDomenskiObjekat polaznik) throws Exception {
         PronadjiPolaznikaSO pp = new PronadjiPolaznikaSO();
         pp.izvrsiOperaciju(polaznik);
-        List<OpstiDomenskiObjekat> lista = pp.getLista();
-        OpstiDomenskiObjekat p = lista.get(0);
-
-        NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
-        nmpidu.izvrsiOperaciju(((Polaznik) p).getMesto());
-        ((Polaznik) p).setMesto((Mesto) nmpidu.getLista().get(0));
-
-        PretraziUgovoreSO ppu = new PretraziUgovoreSO();
-        Ugovor u = new Ugovor();
-        u.setPolaznik((Polaznik) p);
-        ppu.izvrsiOperaciju(u);
-        List<OpstiDomenskiObjekat> ugovori = ppu.getLista();
-
-        List<Ugovor> praviUgovori = new ArrayList<>();
-        for (OpstiDomenskiObjekat ugovor : ugovori) {
-            Ugovor ug = (Ugovor) ugovor;
-
-            PronadjiPolaznikaSO ppso = new PronadjiPolaznikaSO();
-            ppso.izvrsiOperaciju((Polaznik) p);
-            Polaznik polaz = (Polaznik) ppso.getLista().get(0);
-            ug.setPolaznik(polaz);
-
-            PronadjiKursSO pkso = new PronadjiKursSO();
-            pkso.izvrsiOperaciju(ug.getKurs());
-            Kurs kurs = (Kurs) pkso.getLista().get(0);
-            ug.setKurs(kurs);
-
-            praviUgovori.add(ug);
-        }
-        ((Polaznik) p).setUgovori(praviUgovori);
-
-        return p;
+        return pp.getLista().get(0);
     }
 
     public void noviUgovor(OpstiDomenskiObjekat ugovor) throws Exception {
@@ -225,21 +143,7 @@ public class Kontroler {
     public List<OpstiDomenskiObjekat> dajKurseve() throws Exception {
         VratiSveKurseveSO vsk = new VratiSveKurseveSO();
         vsk.izvrsiOperaciju(new Kurs());
-        List<OpstiDomenskiObjekat> lista = vsk.getLista();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-            nsjpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getJezik());
-            ((Kurs) opstiDomenskiObjekat).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-
-            NadjiNivoePoIduSO nnpidu = new NadjiNivoePoIduSO();
-            nnpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getNivo());
-            ((Kurs) opstiDomenskiObjekat).setNivo((Nivo) nnpidu.getLista().get(0));
-
-            NadjiZaposlenePoIduSO nzpidu = new NadjiZaposlenePoIduSO();
-            nzpidu.izvrsiOperaciju(((Kurs) opstiDomenskiObjekat).getNastavnik());
-            ((Kurs) opstiDomenskiObjekat).setNastavnik((Zaposleni) nzpidu.getLista().get(0));
-        }
-        return lista;
+        return vsk.getLista();
     }
 
     public OpstiDomenskiObjekat kreirajNovogZaposlenog() throws Exception {
@@ -256,34 +160,12 @@ public class Kontroler {
     public List<OpstiDomenskiObjekat> pretraziZaposlene(OpstiDomenskiObjekat zaposleni) throws Exception {
         PretraziZaposleneSO pz = new PretraziZaposleneSO();
         pz.izvrsiOperaciju(zaposleni);
-        List<OpstiDomenskiObjekat> lista = pz.getLista();
-        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
-            nmpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getMesto());
-            ((Zaposleni) opstiDomenskiObjekat).setMesto((Mesto) nmpidu.getLista().get(0));
-
-            NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-            nsjpidu.izvrsiOperaciju(((Zaposleni) opstiDomenskiObjekat).getJezik());
-            ((Zaposleni) opstiDomenskiObjekat).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-        }
-        return lista;
+        return pz.getLista();
     }
 
     public OpstiDomenskiObjekat pronadjiZaposlenog(OpstiDomenskiObjekat zaposleni) throws Exception {
         PronadjiZaposlenogSO pz = new PronadjiZaposlenogSO();
         pz.izvrsiOperaciju(zaposleni);
-        List<OpstiDomenskiObjekat> lista = pz.getLista();
-        OpstiDomenskiObjekat z = lista.get(0);
-
-        NadjiMestaPoIduSO nmpidu = new NadjiMestaPoIduSO();
-        nmpidu.izvrsiOperaciju(((Zaposleni) z).getMesto());
-        ((Zaposleni) z).setMesto((Mesto) nmpidu.getLista().get(0));
-
-        NadjiStaneJezikePoIduSO nsjpidu = new NadjiStaneJezikePoIduSO();
-        nsjpidu.izvrsiOperaciju(((Zaposleni) z).getJezik());
-        ((Zaposleni) z).setJezik((StraniJezik) nsjpidu.getLista().get(0));
-
-
-        return z;
+        return pz.getLista().get(0);
     }
 }

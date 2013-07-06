@@ -2,12 +2,12 @@
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
  */
-package so.zaposleni;
+package so.polaznik;
 
 import baza.DBKomunikacija;
+import domen.Mesto;
 import domen.OpstiDomenskiObjekat;
-import domen.StraniJezik;
-import domen.Zaposleni;
+import domen.Polaznik;
 import java.util.List;
 import so.OpstaSO;
 
@@ -15,7 +15,7 @@ import so.OpstaSO;
  *
  * @author Dasa
  */
-public class NadjiZaposlenePoIduSO extends OpstaSO {
+public class VratiSvePolaznikeSO extends OpstaSO {
     
     List<OpstiDomenskiObjekat> lista;
     
@@ -25,7 +25,11 @@ public class NadjiZaposlenePoIduSO extends OpstaSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
-        lista = DBKomunikacija.vratiObjekat().vratiObjektePoKriterijumu((Zaposleni)o);
+        lista = DBKomunikacija.vratiObjekat().vratiSveObjekte((Polaznik)o);
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
+            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) listaMesta.get(0));
+        }
     }
     
     public List<OpstiDomenskiObjekat> getLista() {

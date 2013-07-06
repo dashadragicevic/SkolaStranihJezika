@@ -53,9 +53,11 @@ public class Kurs implements Serializable, OpstiDomenskiObjekat {
         nazivUdzbenika = "Udzbenik";
         StraniJezik sj = new StraniJezik();
         sj.setJezikID(1);
+        sj.setNazivJezika("Engleski jezik");
         jezik = sj;
         Nivo n = new Nivo();
         n.setNivoID(1);
+        n.setOznakaNivoa("A1");
         nivo = n;
         Zaposleni z = new Zaposleni();
         z.setZaposleniID(4);
@@ -227,5 +229,10 @@ public class Kurs implements Serializable, OpstiDomenskiObjekat {
     @Override
     public String vratiVrednostZaWhereZaPretragu() {
         return "JezikID=" + jezik.getJezikID() + " AND NivoID=" + nivo.getNivoID();
+    }
+
+    @Override
+    public String vratiVrednostZaDelete() {
+        return "KursID=" + kursID;
     }
 }

@@ -6,7 +6,10 @@ package so.kurs;
 
 import baza.DBKomunikacija;
 import domen.Kurs;
+import domen.Nivo;
 import domen.OpstiDomenskiObjekat;
+import domen.StraniJezik;
+import domen.Zaposleni;
 import java.util.List;
 import so.OpstaSO;
 
@@ -26,6 +29,16 @@ public class PretraziKurseveSO extends OpstaSO {
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         lista = DBKomunikacija.vratiObjekat().vratiObjektePretraga((Kurs)o);
+        for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
+            List<OpstiDomenskiObjekat> listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Kurs)opstiDomenskiObjekat).getJezik());
+            ((Kurs) opstiDomenskiObjekat).setJezik((StraniJezik) listaJezika.get(0));
+
+            List<OpstiDomenskiObjekat> listaNivoa = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Nivo)((Kurs)opstiDomenskiObjekat).getNivo());
+            ((Kurs) opstiDomenskiObjekat).setNivo((Nivo)listaNivoa.get(0));
+
+            List<OpstiDomenskiObjekat> listaZaposlenih = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni)((Kurs)opstiDomenskiObjekat).getNastavnik());
+            ((Kurs) opstiDomenskiObjekat).setNastavnik((Zaposleni) listaZaposlenih.get(0));
+        }
     }
     
     public List<OpstiDomenskiObjekat> getLista() {
