@@ -6,6 +6,7 @@ package forme.polaznik.ki;
 
 import domen.Mesto;
 import domen.Polaznik;
+import forme.polaznik.FNoviPolaznik;
 import java.text.ParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -30,7 +31,7 @@ public class KontrolorKISacuvajPolaznika {
             JTextField jtxtPrezime, JLabel jlGreskaPrezime, JTextField jtxtJMBG, JLabel jlGreskaJMBG,
             JTextField jtxtBrojLK, JLabel jlGreskaBrojLK, JTextField jtxtUlica, JTextField jtxtBrojUlice,
             JLabel jlGreskaUlicaIBroj, JComboBox jcbbMesto, JLabel jlGreskaMesto, JTextField jtxtTelefon,
-            JLabel jlGreskaTelefon, JTable jtblUgovori) {
+            JLabel jlGreskaTelefon, JTable jtblUgovori, FNoviPolaznik forma) {
         try {
             long polaznikID = Long.parseLong(jlPolaznikID.getText().trim());
             String ime = jtxtIme.getText().trim();
@@ -149,6 +150,7 @@ public class KontrolorKISacuvajPolaznika {
 
             if (sto.isSignal()) {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+                forma.resetujFormu();
             } else {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
             }

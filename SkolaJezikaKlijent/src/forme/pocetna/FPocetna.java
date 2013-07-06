@@ -156,14 +156,12 @@ public class FPocetna extends javax.swing.JFrame {
     private void jmiNoviPolaznikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviPolaznikActionPerformed
         // TODO add your handling code here:
         FNoviPolaznik formaPolaznik = new FNoviPolaznik(this, true);
-        //formaPolaznik.setAlwaysOnTop(true);
         formaPolaznik.setVisible(true);
     }//GEN-LAST:event_jmiNoviPolaznikActionPerformed
 
     private void jmiPretragaPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaPolaznikaActionPerformed
         // TODO add your handling code here:
         FPretragaPolaznika formaPretraga = new FPretragaPolaznika(this, true);
-        //formaPretraga.setAlwaysOnTop(true);
         formaPretraga.setVisible(true);
     }//GEN-LAST:event_jmiPretragaPolaznikaActionPerformed
 

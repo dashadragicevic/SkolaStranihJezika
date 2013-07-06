@@ -61,7 +61,6 @@ public class DBKomunikacija {
 
     public long ubaciNovi(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "INSERT INTO " + odo.vratiImeTabele() + " " + odo.vratiKoloneZaInsert() + " VALUES " + "(" + odo.vratiVrednostZaInsert() + ")";
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         sqlNaredba.executeUpdate(sql);
         sql = "SELECT MAX("+odo.vratiImeTabele()+"ID) as id FROM "+odo.vratiImeTabele();
@@ -76,7 +75,6 @@ public class DBKomunikacija {
 
     public void sacuvajIzmene(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "UPDATE " + odo.vratiImeTabele() + " SET " + odo.vratiVrednostiZaUpdate() + " WHERE " + odo.vratiVrednostZaWhere() + "";
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         sqlNaredba.executeUpdate(sql);
         sqlNaredba.close();
@@ -84,7 +82,6 @@ public class DBKomunikacija {
 
     public List<OpstiDomenskiObjekat> vratiSveObjekte(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "SELECT * FROM " + odo.vratiImeTabele();
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         ResultSet rs = sqlNaredba.executeQuery(sql);
         return odo.vratiListuIzResultSeta(rs);
@@ -92,7 +89,6 @@ public class DBKomunikacija {
 
     public List<OpstiDomenskiObjekat> vratiObjektePoIDu(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "SELECT * FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaWhere();
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         ResultSet rs = sqlNaredba.executeQuery(sql);
         return odo.vratiListuIzResultSeta(rs);
@@ -100,7 +96,6 @@ public class DBKomunikacija {
 
     public List<OpstiDomenskiObjekat> vratiObjektePretraga(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "SELECT * FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaWhereZaPretragu();
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         ResultSet rs = sqlNaredba.executeQuery(sql);
         return odo.vratiListuIzResultSeta(rs);
@@ -108,7 +103,6 @@ public class DBKomunikacija {
 
     public void obrisiObjekat(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "DELETE FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaDelete();
-        System.out.println(sql);
         Statement sqlNaredba = konekcija.createStatement();
         sqlNaredba.executeUpdate(sql);
         sqlNaredba.close();

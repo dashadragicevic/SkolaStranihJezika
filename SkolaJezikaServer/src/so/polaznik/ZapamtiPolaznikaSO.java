@@ -22,11 +22,14 @@ public class ZapamtiPolaznikaSO extends OpstaSO {
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         DBKomunikacija.vratiObjekat().sacuvajIzmene((Polaznik) o);
-
-        DBKomunikacija.vratiObjekat().obrisiObjekat(((Polaznik) o).getUgovori().get(0));
+        
+        Ugovor u = new Ugovor();
+        u.setPolaznik((Polaznik)o);
+        DBKomunikacija.vratiObjekat().obrisiObjekat(u);
 
         for (Ugovor ugovor : ((Polaznik) o).getUgovori()) {
             DBKomunikacija.vratiObjekat().ubaciNovi(ugovor);
         }
+        
     }
 }

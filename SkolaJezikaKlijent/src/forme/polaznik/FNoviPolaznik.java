@@ -358,7 +358,7 @@ public class FNoviPolaznik extends javax.swing.JDialog {
         // TODO add your handling code here:
         KontrolorKISacuvajPolaznika.sacuvajPolaznika(jlPolaznikID, jtxtIme, jlGreskaIme, jtxtPrezime, jlGreskaPrezime,
                 jtxtJMBG, jlGreskaJMBG, jtxtBrojLK, jlGreskaBrojLK, jtxtUlica, jtxtBrojUlice, jlGreskaUlicaIBroj,
-                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtblUgovori);
+                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtblUgovori, this);
         //this.dispose();
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
@@ -574,5 +574,34 @@ public class FNoviPolaznik extends javax.swing.JDialog {
 
         ModelTabeleUgovori mtu = ((ModelTabeleUgovori) jtblUgovori.getModel());
         mtu.setPolaznik(p);
+    }
+    
+    public void resetujFormu(){
+        jlPolaznikID.setText("");
+        jtxtIme.setText("");
+        jlGreskaIme.setText("*");
+        jtxtPrezime.setText("");
+        jlGreskaPrezime.setText("*");
+        jtxtJMBG.setText("");
+        jlGreskaJMBG.setText("*");
+        jtxtBrojLK.setText("");
+        jlGreskaBrojLK.setText("*");
+        jtxtUlica.setText("");
+        jtxtBrojUlice.setText("");
+        jlGreskaUlicaIBroj.setText("*");
+        jcbbMesto.setSelectedIndex(0);
+        jlGreskaMesto.setText("*");
+        jtxtTelefon.setText("");
+        jlGreskaTelefon.setText("*");
+        
+        onemoguciUnos();
+        
+        srediTabelu();
+
+        jbtnNoviPolaznik.setVisible(true);
+        jbtnNoviPolaznik.setEnabled(true);
+
+        jbtnOmoguciIzmenu.setVisible(false);
+        jbtnSacuvaj.setVisible(false);
     }
 }

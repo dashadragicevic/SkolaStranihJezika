@@ -327,8 +327,8 @@ public class FNoviZaposleni extends javax.swing.JDialog {
         // TODO add your handling code here:
         KontrolorKISacuvajZaposlenog.sacuvajZaposlenog(jlPolaznikID, jtxtIme, jlGreskaIme, jtxtPrezime, jlGreskaPrezime,
                 jtxtJMBG, jlGreskaJMBG, jtxtBrojLK, jlGreskaBrojLK, jtxtUlica, jtxtBrojUlice, jlGreskaUlicaIBroj,
-                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtxtRadnaKnjizica, jlGreskaRadnaKnjizica, 
-                jtxtZiroRacun, jlGreskaZiroRacun, jcbbStraniJezik, jlGreskaStraniJezik);
+                jcbbMesto, jlGreskaMesto, jtxtTelefon, jlGreskaTelefon, jtxtRadnaKnjizica, jlGreskaRadnaKnjizica,
+                jtxtZiroRacun, jlGreskaZiroRacun, jcbbStraniJezik, jlGreskaStraniJezik, this);
         //this.dispose();
     }//GEN-LAST:event_jbtnSacuvajActionPerformed
 
@@ -490,5 +490,38 @@ public class FNoviZaposleni extends javax.swing.JDialog {
         jcbbStraniJezik.setEditable(true);
         jcbbStraniJezik.setSelectedItem(z.getJezik());
         jcbbStraniJezik.setEditable(false);
+    }
+
+    public void resetujFormu() {
+        jlPolaznikID.setText("");
+        jtxtIme.setText("");
+        jlGreskaIme.setText("*");
+        jtxtPrezime.setText("");
+        jlGreskaPrezime.setText("*");
+        jtxtJMBG.setText("");
+        jlGreskaJMBG.setText("*");
+        jtxtBrojLK.setText("");
+        jlGreskaBrojLK.setText("*");
+        jtxtUlica.setText("");
+        jtxtBrojUlice.setText("");
+        jlGreskaUlicaIBroj.setText("*");
+        jcbbMesto.setSelectedIndex(0);
+        jlGreskaMesto.setText("*");
+        jtxtTelefon.setText("");
+        jlGreskaTelefon.setText("*");
+        jtxtRadnaKnjizica.setText("");
+        jlGreskaRadnaKnjizica.setText("*");
+        jtxtZiroRacun.setText("");
+        jlGreskaZiroRacun.setText("*");
+        jcbbStraniJezik.setSelectedIndex(0);
+        jlGreskaStraniJezik.setText("*");
+        
+        onemoguciUnos();
+        
+        jbtnNoviZaposleni.setVisible(true);
+        jbtnNoviZaposleni.setEnabled(true);
+
+        jbtnOmoguciIzmenu.setVisible(false);
+        jbtnSacuvaj.setVisible(false);
     }
 }

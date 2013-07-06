@@ -8,6 +8,7 @@ import domen.Mesto;
 import domen.Polaznik;
 import domen.StraniJezik;
 import domen.Zaposleni;
+import forme.zaposleni.FNoviZaposleni;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import javax.swing.JComboBox;
@@ -31,7 +32,7 @@ public class KontrolorKISacuvajZaposlenog {
             JLabel jlGreskaUlicaIBroj, JComboBox jcbbMesto, JLabel jlGreskaMesto, JTextField jtxtTelefon,
             JLabel jlGreskaTelefon, JTextField jtxtRadnaKnjizica, JLabel jlGreskaRadnaKnjizica,
             JTextField jtxtZiroRacun, JLabel jlGreskaZiroRacun, JComboBox jcbbStraniJezik, 
-            JLabel jlGreskaStraniJezik) {
+            JLabel jlGreskaStraniJezik, FNoviZaposleni forma) {
         try {
             long zapID = Long.parseLong(jlPolaznikID.getText().trim());
             String ime = jtxtIme.getText().trim();
@@ -171,6 +172,7 @@ public class KontrolorKISacuvajZaposlenog {
 
             if (sto.isSignal()) {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Uspesno", JOptionPane.INFORMATION_MESSAGE);
+                forma.resetujFormu();
             } else {
                 JOptionPane.showMessageDialog(null, sto.getPoruka(), "Greska", JOptionPane.ERROR_MESSAGE);
             }
