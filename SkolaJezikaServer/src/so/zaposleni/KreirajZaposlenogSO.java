@@ -13,7 +13,7 @@ import so.OpstaSO;
  *
  * @author Dasa
  */
-public class NoviZaposleniSO extends OpstaSO {
+public class KreirajZaposlenogSO extends OpstaSO {
     
     OpstiDomenskiObjekat zaposleni;
 

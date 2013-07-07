@@ -143,37 +143,37 @@ public class FPocetna extends javax.swing.JFrame {
 
     private void jmiUnosKursaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiUnosKursaActionPerformed
         // TODO add your handling code here:
-        FUnosKursa formaUnos = new FUnosKursa(this, true);
+        FUnosKursa formaUnos = new FUnosKursa(this, false);
         formaUnos.setVisible(true);
     }//GEN-LAST:event_jmiUnosKursaActionPerformed
 
     private void jmiPretragaKursevaTabelaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaKursevaTabelaActionPerformed
         // TODO add your handling code here:
-        FPretragaKursevaTabela formaTabela = new FPretragaKursevaTabela(this, true);
+        FPretragaKursevaTabela formaTabela = new FPretragaKursevaTabela(this, false);
         formaTabela.setVisible(true);
     }//GEN-LAST:event_jmiPretragaKursevaTabelaActionPerformed
 
     private void jmiNoviPolaznikActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviPolaznikActionPerformed
         // TODO add your handling code here:
-        FNoviPolaznik formaPolaznik = new FNoviPolaznik(this, true);
+        FNoviPolaznik formaPolaznik = new FNoviPolaznik(this, false);
         formaPolaznik.setVisible(true);
     }//GEN-LAST:event_jmiNoviPolaznikActionPerformed
 
     private void jmiPretragaPolaznikaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaPolaznikaActionPerformed
         // TODO add your handling code here:
-        FPretragaPolaznika formaPretraga = new FPretragaPolaznika(this, true);
+        FPretragaPolaznika formaPretraga = new FPretragaPolaznika(this, false);
         formaPretraga.setVisible(true);
     }//GEN-LAST:event_jmiPretragaPolaznikaActionPerformed
 
     private void jmiNoviZaposleniActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiNoviZaposleniActionPerformed
         // TODO add your handling code here:
-        FNoviZaposleni f = new FNoviZaposleni(this, true);
+        FNoviZaposleni f = new FNoviZaposleni(this, false);
         f.setVisible(true);
     }//GEN-LAST:event_jmiNoviZaposleniActionPerformed
 
     private void jmiPretragaZaposlenihActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiPretragaZaposlenihActionPerformed
         // TODO add your handling code here:
-        FPretragaZaposlenih f = new FPretragaZaposlenih(this, true);
+        FPretragaZaposlenih f = new FPretragaZaposlenih(this, false);
         f.setVisible(true);
     }//GEN-LAST:event_jmiPretragaZaposlenihActionPerformed
 

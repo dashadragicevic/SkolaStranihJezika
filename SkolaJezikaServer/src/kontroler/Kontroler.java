@@ -13,7 +13,7 @@ import domen.Polaznik;
 import domen.StraniJezik;
 import domen.Zaposleni;
 import java.util.List;
-import so.kurs.NoviKursSO;
+import so.kurs.KreirajNoviKursSO;
 import so.kurs.ObrisiKursSO;
 import so.kurs.PretraziKurseveSO;
 import so.kurs.PronadjiKursSO;
@@ -21,14 +21,14 @@ import so.kurs.VratiSveKurseveSO;
 import so.kurs.ZapamtiKursSO;
 import so.mesto.VratiSvaMestaSO;
 import so.nivo.VratiNivoeSO;
-import so.polaznik.NoviPolaznikSO;
+import so.polaznik.KreirajPolaznikaSO;
 import so.polaznik.PretraziPolaznikeSO;
 import so.polaznik.PronadjiPolaznikaSO;
 import so.polaznik.VratiSvePolaznikeSO;
 import so.polaznik.ZapamtiPolaznikaSO;
 import so.stranijezici.VratiStraneJezikeSO;
 import so.ugovor.NoviUgovorSO;
-import so.zaposleni.NoviZaposleniSO;
+import so.zaposleni.KreirajZaposlenogSO;
 import so.zaposleni.PretraziZaposleneSO;
 import so.zaposleni.PronadjiZaposlenogSO;
 import so.zaposleni.VratiZaposleneSO;
@@ -73,7 +73,7 @@ public class Kontroler {
     }
 
     public OpstiDomenskiObjekat kreirajNoviKurs() throws Exception {
-        NoviKursSO nk = new NoviKursSO();
+        KreirajNoviKursSO nk = new KreirajNoviKursSO();
         nk.izvrsiOperaciju(new Kurs());
         return nk.getNoviKurs();
     }
@@ -107,7 +107,7 @@ public class Kontroler {
     }
 
     public OpstiDomenskiObjekat kreirajNovogPolaznika() throws Exception {
-        NoviPolaznikSO np = new NoviPolaznikSO();
+        KreirajPolaznikaSO np = new KreirajPolaznikaSO();
         np.izvrsiOperaciju(new Polaznik());
         return np.getPolaznik();
     }
@@ -147,7 +147,7 @@ public class Kontroler {
     }
 
     public OpstiDomenskiObjekat kreirajNovogZaposlenog() throws Exception {
-        NoviZaposleniSO nz = new NoviZaposleniSO();
+        KreirajZaposlenogSO nz = new KreirajZaposlenogSO();
         nz.izvrsiOperaciju(new Zaposleni());
         return nz.getZaposleni();
     }

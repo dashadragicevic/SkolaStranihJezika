@@ -13,7 +13,7 @@ import so.OpstaSO;
  *
  * @author Dasa
  */
-public class NoviKursSO extends OpstaSO {
+public class KreirajNoviKursSO extends OpstaSO {
 
     OpstiDomenskiObjekat noviKurs;
     
