@@ -31,14 +31,14 @@ public class VratiSveKurseveSO extends OpstaSO {
         lista = DBKomunikacija.vratiObjekat().vratiSveObjekte((Kurs)o);
         
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            List<OpstiDomenskiObjekat> listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Kurs)opstiDomenskiObjekat).getJezik());
-            ((Kurs) opstiDomenskiObjekat).setJezik((StraniJezik) listaJezika.get(0));
+            OpstiDomenskiObjekat jezik = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Kurs)opstiDomenskiObjekat).getJezik());
+            ((Kurs) opstiDomenskiObjekat).setJezik((StraniJezik) jezik);
 
-            List<OpstiDomenskiObjekat> listaNivoa = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Nivo)((Kurs)opstiDomenskiObjekat).getNivo());
-            ((Kurs) opstiDomenskiObjekat).setNivo((Nivo) listaNivoa.get(0));
+            OpstiDomenskiObjekat nivo = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Nivo)((Kurs)opstiDomenskiObjekat).getNivo());
+            ((Kurs) opstiDomenskiObjekat).setNivo((Nivo) nivo);
 
-            List<OpstiDomenskiObjekat> listaNastavnika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni)((Kurs)opstiDomenskiObjekat).getNastavnik());
-            ((Kurs) opstiDomenskiObjekat).setNastavnik((Zaposleni) listaNastavnika.get(0));
+            OpstiDomenskiObjekat nastavnik = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni)((Kurs)opstiDomenskiObjekat).getNastavnik());
+            ((Kurs) opstiDomenskiObjekat).setNastavnik((Zaposleni) nastavnik);
         }
     }
     

@@ -29,11 +29,11 @@ public class PretraziZaposleneSO extends OpstaSO {
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         lista = DBKomunikacija.vratiObjekat().vratiObjektePretraga((Zaposleni)o);
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Zaposleni)opstiDomenskiObjekat).getMesto());
-            ((Zaposleni) opstiDomenskiObjekat).setMesto((Mesto) listaMesta.get(0));
+            OpstiDomenskiObjekat mesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Zaposleni)opstiDomenskiObjekat).getMesto());
+            ((Zaposleni) opstiDomenskiObjekat).setMesto((Mesto) mesta);
 
-            List<OpstiDomenskiObjekat> listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Zaposleni)opstiDomenskiObjekat).getJezik());
-            ((Zaposleni) opstiDomenskiObjekat).setJezik((StraniJezik) listaJezika.get(0));
+            OpstiDomenskiObjekat jezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Zaposleni)opstiDomenskiObjekat).getJezik());
+            ((Zaposleni) opstiDomenskiObjekat).setJezik((StraniJezik) jezika);
         }
     }
     

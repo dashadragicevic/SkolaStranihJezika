@@ -87,11 +87,11 @@ public class DBKomunikacija {
         return odo.vratiListuIzResultSeta(rs);
     }
 
-    public List<OpstiDomenskiObjekat> vratiObjektePoIDu(OpstiDomenskiObjekat odo) throws Exception {
+    public OpstiDomenskiObjekat vratiObjektePoIDu(OpstiDomenskiObjekat odo) throws Exception {
         String sql = "SELECT * FROM " + odo.vratiImeTabele() + " WHERE " + odo.vratiVrednostZaWhere();
         Statement sqlNaredba = konekcija.createStatement();
         ResultSet rs = sqlNaredba.executeQuery(sql);
-        return odo.vratiListuIzResultSeta(rs);
+        return odo.vratiListuIzResultSeta(rs).get(0);
     }
 
     public List<OpstiDomenskiObjekat> vratiObjektePretraga(OpstiDomenskiObjekat odo) throws Exception {

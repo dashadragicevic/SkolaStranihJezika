@@ -92,7 +92,7 @@ public class Kontroler {
     public OpstiDomenskiObjekat pronadjiKurs(OpstiDomenskiObjekat kurs) throws Exception {
         PronadjiKursSO pk = new PronadjiKursSO();
         pk.izvrsiOperaciju(kurs);
-        return pk.getLista().get(0);
+        return pk.getKurs();
     }
 
     public void obrisiKurs(OpstiDomenskiObjekat kurs) throws Exception {
@@ -132,7 +132,7 @@ public class Kontroler {
     public OpstiDomenskiObjekat pronadjiPolaznika(OpstiDomenskiObjekat polaznik) throws Exception {
         PronadjiPolaznikaSO pp = new PronadjiPolaznikaSO();
         pp.izvrsiOperaciju(polaznik);
-        return pp.getLista().get(0);
+        return pp.getPolaznik();
     }
 
     public void noviUgovor(OpstiDomenskiObjekat ugovor) throws Exception {
@@ -166,6 +166,6 @@ public class Kontroler {
     public OpstiDomenskiObjekat pronadjiZaposlenog(OpstiDomenskiObjekat zaposleni) throws Exception {
         PronadjiZaposlenogSO pz = new PronadjiZaposlenogSO();
         pz.izvrsiOperaciju(zaposleni);
-        return pz.getLista().get(0);
+        return pz.getZaposleni();
     }
 }

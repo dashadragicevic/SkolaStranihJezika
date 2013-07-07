@@ -28,8 +28,8 @@ public class PretraziPolaznikeSO extends OpstaSO {
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         lista = DBKomunikacija.vratiObjekat().vratiObjektePretraga((Polaznik)o);
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
-            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) listaMesta.get(0));
+            OpstiDomenskiObjekat mesto = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
+            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) mesto);
         }
     }
     

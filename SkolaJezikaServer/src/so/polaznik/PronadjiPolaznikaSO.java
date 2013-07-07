@@ -24,7 +24,7 @@ import so.kurs.PronadjiKursSO;
  */
 public class PronadjiPolaznikaSO extends OpstaSO {
 
-    List<OpstiDomenskiObjekat> lista;
+    OpstiDomenskiObjekat polaznik;
 
     @Override
     protected void proveriPreduslov(Object o) throws Exception {
@@ -32,12 +32,12 @@ public class PronadjiPolaznikaSO extends OpstaSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
-        lista = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Polaznik) o);
+        polaznik = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Polaznik) o);
 
-        OpstiDomenskiObjekat p = lista.get(0);
+        OpstiDomenskiObjekat p = polaznik;
 
-        List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto) ((Polaznik)p).getMesto());
-        ((Polaznik) p).setMesto((Mesto) listaMesta.get(0));
+        OpstiDomenskiObjekat mesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto) ((Polaznik)p).getMesto());
+        ((Polaznik) p).setMesto((Mesto) mesta);
 
         Ugovor u = new Ugovor();
         u.setPolaznik((Polaznik) p);
@@ -49,16 +49,16 @@ public class PronadjiPolaznikaSO extends OpstaSO {
 
             ug.setPolaznik((Polaznik) p);
 
-            List<OpstiDomenskiObjekat> listaKurseva = DBKomunikacija.vratiObjekat().vratiObjektePoIDu(ug.getKurs());
-            OpstiDomenskiObjekat k = listaKurseva.get(0);
-            List<OpstiDomenskiObjekat> listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Kurs)k).getJezik());
-            ((Kurs) k).setJezik((StraniJezik) listaJezika.get(0));
-            List<OpstiDomenskiObjekat> listaNivoa = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Nivo) ((Kurs)k).getNivo());
-            ((Kurs) k).setNivo((Nivo) listaNivoa.get(0));
-            List<OpstiDomenskiObjekat> listaZaposlenih = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni) ((Kurs)k).getNastavnik());
-            ((Kurs) k).setNastavnik((Zaposleni) listaZaposlenih.get(0));
+            OpstiDomenskiObjekat kurseva = DBKomunikacija.vratiObjekat().vratiObjektePoIDu(ug.getKurs());
+            OpstiDomenskiObjekat k = kurseva;
+            OpstiDomenskiObjekat jezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Kurs)k).getJezik());
+            ((Kurs) k).setJezik((StraniJezik) jezika);
+            OpstiDomenskiObjekat nivoa = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Nivo) ((Kurs)k).getNivo());
+            ((Kurs) k).setNivo((Nivo) nivoa);
+            OpstiDomenskiObjekat zaposlenih = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni) ((Kurs)k).getNastavnik());
+            ((Kurs) k).setNastavnik((Zaposleni) zaposlenih);
 
-            Kurs kurs = (Kurs) listaKurseva.get(0);
+            Kurs kurs = (Kurs) kurseva;
             ug.setKurs(kurs);
 
             praviUgovori.add(ug);
@@ -66,11 +66,8 @@ public class PronadjiPolaznikaSO extends OpstaSO {
         ((Polaznik) p).setUgovori(praviUgovori);
     }
 
-    public List<OpstiDomenskiObjekat> getLista() {
-        return lista;
+    public OpstiDomenskiObjekat getPolaznik() {
+        return polaznik;
     }
 
-    public void setLista(List<OpstiDomenskiObjekat> lista) {
-        this.lista = lista;
-    }
 }

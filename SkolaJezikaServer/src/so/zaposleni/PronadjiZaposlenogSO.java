@@ -18,7 +18,7 @@ import so.OpstaSO;
  */
 public class PronadjiZaposlenogSO extends OpstaSO {
     
-    List<OpstiDomenskiObjekat> lista;
+    OpstiDomenskiObjekat zaposleni;
     
     @Override
     protected void proveriPreduslov(Object o) throws Exception {
@@ -27,23 +27,19 @@ public class PronadjiZaposlenogSO extends OpstaSO {
 
     @Override
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
-        lista = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni)o);
+        zaposleni = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Zaposleni)o);
         
-        OpstiDomenskiObjekat z = lista.get(0);
+        OpstiDomenskiObjekat z = zaposleni;
 
-        List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Zaposleni)z).getMesto());
-        ((Zaposleni) z).setMesto((Mesto) listaMesta.get(0));
+        OpstiDomenskiObjekat listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Zaposleni)z).getMesto());
+        ((Zaposleni) z).setMesto((Mesto) listaMesta);
 
-        List<OpstiDomenskiObjekat> listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Zaposleni)z).getJezik());
-        ((Zaposleni) z).setJezik((StraniJezik) listaJezika.get(0));
+        OpstiDomenskiObjekat listaJezika = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((StraniJezik)((Zaposleni)z).getJezik());
+        ((Zaposleni) z).setJezik((StraniJezik) listaJezika);
     }
 
-    public List<OpstiDomenskiObjekat> getLista() {
-        return lista;
-    }
-
-    public void setLista(List<OpstiDomenskiObjekat> lista) {
-        this.lista = lista;
+    public OpstiDomenskiObjekat getZaposleni() {
+        return zaposleni;
     }
     
 }

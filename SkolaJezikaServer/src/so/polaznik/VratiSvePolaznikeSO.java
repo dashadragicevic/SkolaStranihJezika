@@ -27,8 +27,8 @@ public class VratiSvePolaznikeSO extends OpstaSO {
     protected void izvrsiKonkretnuOperaciju(Object o) throws Exception {
         lista = DBKomunikacija.vratiObjekat().vratiSveObjekte((Polaznik)o);
         for (OpstiDomenskiObjekat opstiDomenskiObjekat : lista) {
-            List<OpstiDomenskiObjekat> listaMesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
-            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) listaMesta.get(0));
+            OpstiDomenskiObjekat mesta = DBKomunikacija.vratiObjekat().vratiObjektePoIDu((Mesto)((Polaznik)opstiDomenskiObjekat).getMesto());
+            ((Polaznik) opstiDomenskiObjekat).setMesto((Mesto) mesta);
         }
     }
     
